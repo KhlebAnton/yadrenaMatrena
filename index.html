@@ -526,7 +526,7 @@
                                 <div class="product-card_price">
                                     5 999₽
                                 </div>
-                                <button class="btn btn-primary">Предзаказ</button>
+                                <button class="btn btn-primary" >Предзаказ</button>
                             </div>
                             <div class="swiper-slide product-card" data-btn="product" data-product-collection="Барыня"
                                 data-product-model="Барыня 2">
@@ -620,9 +620,9 @@
                     <div class="model_color-container">
                         <span>Выберите цвет:</span>
                         <div class="model_color_wrapper">
-                            <div class="model_color-item" style="background-color: #FFFFFF;" data-model-color="white"></div>
-                            <div class="model_color-item is-active" style="background-color: #393939;" data-model-color="black"></div>
-                            <div class="model_color-item" style="background-color: #C9132A;" data-model-color="red"></div>
+                            <div class="model_color-item" style="background: #FFFFFF;" data-model-color="white"></div>
+                            <div class="model_color-item is-active" style="background: #393939;" data-model-color="black"></div>
+                            <div class="model_color-item" style="background: #C9132A;" data-model-color="red"></div>
                             <div class="model_color-item"
                                 style="background: linear-gradient(143.9deg, #210089 7.91%, #750087 31.76%, #AF0173 53.05%, #FC1A02 71.36%, #FEED01 92.65%);"
                                 data-model-color="gradient">
@@ -669,7 +669,7 @@
                         <div class="product-card_price">
                             5 999₽
                         </div>
-                        <button class="btn btn-primary">Предзаказ</button>
+                        <button class="btn btn-primary" data-btn="productOrder">Предзаказ</button>
                         <span class="red-hint">Яндекс Станция в комплект не входит</span>
 
                     </div>
@@ -684,7 +684,7 @@
                                 <div class="swiper-wrapper swiper-wrapper__main">
                                     <!-- Слайд с 3D моделью -->
                                     <div class="swiper-slide swiper-slide__main">
-                                        <div class="model-container" data-object="/models/2.glb"
+                                        <div class="model-container" data-object="./models/2.glb"
                                             data-preview="./images/products/1.png">
                                             <canvas class="model-viewer"></canvas>
                                             <div class="loading">Loading model...</div>
@@ -876,7 +876,7 @@
                                 <div class="swiper-wrapper swiper-wrapper__main">
                                     <!-- Слайд с 3D моделью -->
                                     <div class="swiper-slide swiper-slide__main">
-                                        <div class="model-container" data-object="/models/2-red.glb"
+                                        <div class="model-container" data-object="./models/2-red.glb"
                                             data-preview="./images/products/1red.png">
                                             <canvas class="model-viewer"></canvas>
                                             <div class="loading">Loading model...</div>
@@ -1068,7 +1068,7 @@
                                 <div class="swiper-wrapper swiper-wrapper__main">
                                     <!-- Слайд с 3D моделью -->
                                     <div class="swiper-slide swiper-slide__main">
-                                        <div class="model-container" data-object="/models/2-wh.glb"
+                                        <div class="model-container" data-object="./models/2-wh.glb"
                                             data-preview="./images/products/1wh.png">
                                             <canvas class="model-viewer"></canvas>
                                             <div class="loading">Loading model...</div>
@@ -1260,7 +1260,7 @@
                                 <div class="swiper-wrapper swiper-wrapper__main">
                                     <!-- Слайд с 3D моделью -->
                                     <div class="swiper-slide swiper-slide__main">
-                                        <div class="model-container" data-object="/models/2-gr.glb"
+                                        <div class="model-container" data-object="./models/2-gr.glb"
                                             data-preview="./images/products/1grad.png">
                                             <canvas class="model-viewer"></canvas>
                                             <div class="loading">Loading model...</div>
@@ -1455,7 +1455,52 @@
             </div>
         </div>
     </div>
-
+    <div class="modal-overlay is-open" data-modal="productOrder">
+        <div class="modal_popup">
+            <svg class="modal-close">
+                <use href="./images/sprite.svg#close"></use>
+            </svg>
+           <div class="order-product-container">
+            <div class="about-order-product">
+                <div class="order-product-img-wrapper">
+                    <img id="orderImg" src="./images/products/1.png" alt="">
+                </div>
+                <div class="about-order-product-info">
+                    <div class="about_order-item">
+                        <span>
+                            Коллекция
+                        </span>
+                        <span id="orderCollection">
+                            Славянский шик
+                        </span>
+                    </div>
+                    <div class="about_order-item">
+                        <span>
+                            Модель
+                        </span>
+                        <span id="orderModel">
+                            Русский дух
+                        </span>
+                    </div>
+                    <div class="about_order-item">
+                        <span>
+                            Цвет
+                        </span>
+                        <div id="orderColor" class="order-product-color model_color-item " style="background-color: #393939;"></div>
+                    </div>
+                    <div class="about_order-item">
+                        <span>
+                            Для станции
+                        </span>
+                        <span id="orderStation">
+                            Лайт
+                        </span>
+                    </div>
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
 
 
 

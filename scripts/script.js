@@ -119,6 +119,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    const productOrderInfo = {
+        img: './images/products/2.png',
+        collection: 'Коллекция',
+        model: 'Модель',
+        color: '#000000',
+        station: 'Станция',
+    }
 
 
     // Инициализация всех модальных окон
@@ -132,10 +139,31 @@ document.addEventListener('DOMContentLoaded', function () {
         const openBtn = document.querySelectorAll(`[data-btn="${modalId}"]`);
 
         function openModal(name = null) {
+            modals.forEach(modal => {
+                modal.classList.remove('is-open');
+                document.body.style.overflow = '';
+
+
+                modal.querySelectorAll('video').forEach(video => {
+                    video.pause();
+                    video.currentTime = 0;
+                    const btn = video.closest('.swiper-slide').querySelector('.video_btn');
+                    if (btn) btn.style.display = '';
+                });
+            })
             modal.classList.add('is-open');
             document.body.style.overflow = 'hidden';
             if (modalId === 'product') {
-                modal.querySelector('.product_model-name').textContent = name ? name : 'Без имени'
+                modal.querySelector('.product_model-name').textContent = name ? name : 'Без имени';
+
+            };
+
+            if (modalId === 'productOrder') {
+                
+                document.getElementById('orderImg').src = productOrderInfo.img;
+                document.getElementById('orderCollection').textContent = productOrderInfo.collection;
+                document.getElementById('orderModel').textContent = productOrderInfo.model;
+                
             }
         }
 
@@ -143,41 +171,71 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.classList.remove('is-open');
             document.body.style.overflow = '';
 
-            
-                modal.querySelectorAll('video').forEach(video => {
-                    video.pause();
-                    video.currentTime = 0;
-                    const btn = video.closest('.swiper-slide').querySelector('.video_btn');
-                    if (btn) btn.style.display = '';
-                });
-            }
 
-            
+            modal.querySelectorAll('video').forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+                const btn = video.closest('.swiper-slide').querySelector('.video_btn');
+                if (btn) btn.style.display = '';
+            });
+        }
 
-            if (openBtn) {
-                openBtn.forEach(btn => {
-                    btn.addEventListener('click', () => {
+
+
+        if (openBtn) {
+            openBtn.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if(btn.getAttribute('data-btn') === 'product') {
                         let nameProduct = btn.getAttribute('data-product-model');
                         console.log(nameProduct);
+                        openModal(nameProduct);
 
-                        openModal(nameProduct)
-                    })
+                        productOrderInfo.img = btn.querySelector('.product-card_img').src;
+                         productOrderInfo.collection = btn.getAttribute('data-product-collection');
+                        productOrderInfo.model = btn.getAttribute('data-product-model');
 
 
-                });
-            }
-            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+                    } else if (btn.getAttribute('data-btn') === 'productOrder')   {
+                        console.log('order');
+                        document.querySelectorAll('.model_color-item').forEach(color => {
+                            if(color.classList.contains('is-active')) {
+                                productOrderInfo.color = color.style.background;
+                            }
 
-            modal.addEventListener('click', function (e) {
-                if (e.target === modal) closeModal();
-            });
+                            document.getElementById('orderColor').style.background = productOrderInfo.color;
+                        });
+                        document.querySelectorAll('.model-station-tab').forEach(station => {
+                            if(station.classList.contains('is-active')) {
+                                productOrderInfo.station = station.getAttribute('data-tab-station').replace("Станция ", "");
+                            }
 
-            if (modalId === 'menu') {
-                modal.addEventListener('click', () => {
-                    closeModal();
+                            document.getElementById('orderStation').textContent = productOrderInfo.station;
+                        })
+                         openModal();
+
+                    } else {
+                        openModal()
+                    }
+                    
+
+                    
                 })
-            }
+
+
+            });
+        }
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
         });
+
+        if (modalId === 'menu') {
+            modal.addEventListener('click', () => {
+                closeModal();
+            })
+        }
+    });
 
 
 
