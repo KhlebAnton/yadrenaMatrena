@@ -1,89 +1,362 @@
-// Глобальные переменные для текущей сцены
-let currentScene = null;
-let currentRenderer = null;
-let currentCamera = null;
-let currentModel = null;
-let currentContainer = null;
+// Инициализация после загрузки DOM и всех скриптов
+document.addEventListener('DOMContentLoaded', function () {
+    // Проверяем, загружен ли Three.js
+    if (typeof THREE === 'undefined') {
+        loadThreeJS().then(initAll);
+    } else {
+        initAll();
+    }
+});
 
-// Функция для очистки текущей сцены
-function cleanupCurrentScene() {
-    if (!currentScene) return;
-    
-    // Удаляем все объекты из сцены
-    while(currentScene.children.length > 0) { 
-        currentScene.remove(currentScene.children[0]); 
-    }
-    
-    // Останавливаем анимацию
-    if (currentRenderer) {
-        currentRenderer.dispose();
-    }
-    
-    currentScene = null;
-    currentRenderer = null;
-    currentCamera = null;
-    currentModel = null;
+// Функция для загрузки Three.js
+function loadThreeJS() {
+    return new Promise((resolve) => {
+        const scripts = [
+            'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js',
+            'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js',
+            'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/DRACOLoader.js'
+        ];
+
+        let loaded = 0;
+
+        scripts.forEach(src => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => {
+                loaded++;
+                if (loaded === scripts.length) resolve();
+            };
+            document.head.appendChild(script);
+        });
+    });
 }
 
-// Основная функция для показа модели
-function showModel(modelPath, containerSelector = '.model-container') {
-    // Находим контейнер
-    const container = document.querySelector(`${containerSelector}[data-object="${modelPath}"]`);
-    if (!container) {
-        console.error(`Container with data-object="${modelPath}" not found`);
-        return;
+// Глобальные переменные для управления сценами
+const modelScenes = new Map();
+
+// Инициализация всего
+function initAll() {
+    initColorTabs();
+    initStationTabs();
+    initVisibleSwipers();
+}
+
+// Инициализация цветовых табов
+function initColorTabs() {
+    const colorItems = document.querySelectorAll('.model_color-item');
+    
+    colorItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const color = this.getAttribute('data-model-color');
+            
+            // Удаляем активный класс у всех
+            colorItems.forEach(i => i.classList.remove('is-active'));
+            // Добавляем активный класс текущему
+            this.classList.add('is-active');
+            
+            // Показываем соответствующие свайперы
+            updateVisibleSwipers(color);
+        });
+    });
+}
+
+// Инициализация табов станций
+function initStationTabs() {
+    const stationTabs = document.querySelectorAll('.model-station-tab');
+    
+    stationTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const station = this.getAttribute('data-tab-station');
+            
+            // Удаляем активный класс у всех
+            stationTabs.forEach(t => t.classList.remove('is-active'));
+            // Добавляем активный класс текущему
+            this.classList.add('is-active');
+            
+            // Показываем соответствующие свайперы
+            updateVisibleSwipers(null, station);
+        });
+    });
+}
+
+// Обновление видимых свайперов
+function updateVisibleSwipers(color = null, station = null) {
+    // Получаем текущие активные табы, если параметры не переданы
+    if (color === null) {
+        const activeColor = document.querySelector('.model_color-item.is-active');
+        color = activeColor ? activeColor.getAttribute('data-model-color') : 'black';
     }
     
-    // Очищаем предыдущую сцену
-    cleanupCurrentScene();
+    if (station === null) {
+        const activeStation = document.querySelector('.model-station-tab.is-active');
+        station = activeStation ? activeStation.getAttribute('data-tab-station') : 'Станция Мини 2';
+    }
     
-    // Инициализируем новую сцену
-    initModelViewer(container, modelPath);
+    // Скрываем все свайперы
+    document.querySelectorAll('.product_swiper-container').forEach(container => {
+        container.style.display = 'none';
+         stopAllVideos(container);
+        // При скрытии останавливаем рендеринг для этого контейнера
+        const swiperId = container.id;
+        if (modelScenes.has(swiperId)) {
+            const sceneData = modelScenes.get(swiperId);
+            cancelAnimationFrame(sceneData.animationId);
+        }
+    });
+    
+    // Показываем только нужные
+    const visibleSelector = `.product_swiper-container[data-model-color="${color}"][data-tab-station="${station}"]`;
+    const visibleContainers = document.querySelectorAll(visibleSelector);
+    
+    visibleContainers.forEach(container => {
+        // Генерируем уникальный ID для контейнера, если его нет
+        if (!container.id) {
+            container.id = 'swiper-' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        container.style.display = '';
+        
+        // Если свайпер еще не инициализирован, инициализируем его
+        if (!container.hasAttribute('data-swiper-initialized')) {
+            initProductSwiper(container);
+            container.setAttribute('data-swiper-initialized', 'true');
+        } else {
+            // Если свайпер уже инициализирован, возобновляем рендеринг
+            const swiperId = container.id;
+            if (modelScenes.has(swiperId)) {
+                const sceneData = modelScenes.get(swiperId);
+                sceneData.animationId = requestAnimationFrame(sceneData.animate);
+                
+                // Восстанавливаем canvas в DOM
+                const modelContainer = container.querySelector('.model-container');
+                if (modelContainer) {
+                    const existingCanvas = modelContainer.querySelector('.model-viewer');
+                    if (existingCanvas) {
+                        existingCanvas.replaceWith(sceneData.canvas);
+                    } else {
+                        modelContainer.appendChild(sceneData.canvas);
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Инициализация видимых свайперов при загрузке
+function initVisibleSwipers() {
+    updateVisibleSwipers();
+}
+
+// Инициализация одного продукта-свайпера
+function initProductSwiper(container) {
+    // Сначала инициализируем превью
+   const previewSwiper = new Swiper(container.querySelector('.product-swiper__preview'), {
+    spaceBetween: 10,
+    slidesPerView: 'auto',
+    direction: 'horizontal', // По умолчанию вертикальный
+    navigation: {
+        nextEl: container.querySelector('.swiper__preview-button-next'),
+        prevEl: container.querySelector('.swiper__preview-button-prev'),
+    },
+    breakpoints: {
+        // При ширине экрана меньше 1350px
+        1350: {
+            direction: 'vertical', // Меняем на горизонтальный
+           
+        }
+    }
+});
+
+    // Затем основной свайпер
+    const mainSwiper = new Swiper(container.querySelector('.product-swiper__main'), {
+        spaceBetween: 10,
+        navigation: {
+            nextEl: container.querySelector('.swiper__main-button-next'),
+            prevEl: container.querySelector('.swiper__main-button-prev'),
+        },
+        thumbs: {
+            swiper: previewSwiper
+        },
+        simulateTouch: false,
+        preventInteractionOnTransition: true
+    });
+
+    // Обработка 3D моделей
+    mainSwiper.on('slideChange', function () {
+        const activeSlide = this.slides[this.activeIndex];
+        const modelContainer = activeSlide.querySelector('.model-container');
+
+        if (modelContainer) {
+            const modelPath = modelContainer.getAttribute('data-object');
+            showModel(modelPath, modelContainer, container.id);
+        }
+    });
+
+    // Инициализация первой модели, если есть
+    const firstModel = container.querySelector('.model-container');
+    if (firstModel) {
+        const modelPath = firstModel.getAttribute('data-object');
+        showModel(modelPath, firstModel, container.id);
+    }
+
+    // Обработка видео
+    const videoSlides = container.querySelectorAll('.swiper-slide__main-video');
+    videoSlides.forEach(slide => {
+        const video = slide.querySelector('video');
+        const btn = slide.querySelector('.video_btn');
+
+        btn.addEventListener('click', () => {
+            video.play();
+            btn.style.display = 'none';
+        });
+
+        video.addEventListener('click', videoPause);
+        video.addEventListener('ended', videoStop);
+
+        function videoPause() {
+            video.pause();
+            btn.style.display = '';
+        }
+        
+        function videoStop() {
+            video.pause();
+            btn.style.display = '';
+            video.currentTime = 0;
+        }
+    });
+
+    // Остановка видео при смене слайда
+    mainSwiper.on('slideChange', function () {
+        stopAllVideos(container);
+    });
+}
+
+// Остановка всех видео в контейнере
+function stopAllVideos(container) {
+    container.querySelectorAll('video').forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+        const btn = video.closest('.swiper-slide').querySelector('.video_btn');
+        if (btn) btn.style.display = '';
+    });
+}
+
+// Показать модель
+function showModel(modelPath, container, swiperId) {
+    // Если модель уже загружена для этого свайпера, просто показываем ее
+    if (modelScenes.has(swiperId)) {
+        const sceneData = modelScenes.get(swiperId);
+        if (sceneData.modelPath === modelPath) {
+            // Просто активируем существующую сцену
+            activateScene(sceneData, container);
+            return;
+        } else {
+            // Очищаем предыдущую сцену
+            cleanupScene(sceneData);
+            modelScenes.delete(swiperId);
+        }
+    }
+    
+    // Загружаем новую модель
+    initModelViewer(container, modelPath, swiperId);
+}
+
+// Активировать существующую сцену
+function activateScene(sceneData, container) {
+    const existingCanvas = container.querySelector('.model-viewer');
+    if (existingCanvas) {
+        existingCanvas.replaceWith(sceneData.canvas);
+    } else {
+        container.appendChild(sceneData.canvas);
+    }
+    sceneData.canvas.style.display = '';
+    sceneData.resizeObserver.observe(container);
+    
+    // Возобновляем анимацию
+    sceneData.animationId = requestAnimationFrame(sceneData.animate);
+}
+
+// Очистка сцены
+function cleanupScene(sceneData) {
+    if (sceneData.resizeObserver) {
+        sceneData.resizeObserver.disconnect();
+    }
+    
+    if (sceneData.renderer) {
+        sceneData.renderer.dispose();
+    }
+    
+    if (sceneData.scene) {
+        while (sceneData.scene.children.length > 0) {
+            sceneData.scene.remove(sceneData.scene.children[0]);
+        }
+    }
+    
+    // Удаляем обработчики событий
+    const canvas = sceneData.canvas;
+    canvas.removeEventListener('mousedown', sceneData.onPointerDown);
+    canvas.removeEventListener('touchstart', sceneData.onPointerDown);
+    window.removeEventListener('mouseup', sceneData.onPointerUp);
+    window.removeEventListener('touchend', sceneData.onPointerUp);
+    window.removeEventListener('mousemove', sceneData.onPointerMove);
+    window.removeEventListener('touchmove', sceneData.onPointerMove);
+    
+    // Останавливаем анимацию
+    cancelAnimationFrame(sceneData.animationId);
 }
 
 // Инициализация просмотрщика модели
-function initModelViewer(container, modelPath) {
-    // Сохраняем ссылку на текущий контейнер
-    currentContainer = container;
-    
-    // Элементы интерфейса
+function initModelViewer(container, modelPath, swiperId) {
     const canvas = container.querySelector('.model-viewer');
     const loadingElement = container.querySelector('.loading');
     const errorElement = container.querySelector('.error');
 
-    // Инициализация Three.js
-    currentScene = new THREE.Scene();
-    currentScene.background = new THREE.Color(0xeeeeee);
+    // Создаем новую сцену
+    const scene = new THREE.Scene();
+    scene.background = null;
 
-    currentCamera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-    currentCamera.position.z = 5;
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+    camera.position.z = 5;
 
-    currentRenderer = new THREE.WebGLRenderer({
+    const renderer = new THREE.WebGLRenderer({
         canvas: canvas,
-        antialias: true
+        antialias: true,
+        alpha: true
     });
-    currentRenderer.outputEncoding = THREE.sRGBEncoding;
-    currentRenderer.setPixelRatio(window.devicePixelRatio);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.setPixelRatio(window.devicePixelRatio);
+    
+    function updateRendererSize() {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    }
+    
     updateRendererSize();
 
     // Освещение
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    currentScene.add(ambientLight);
+    scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(1, 1, 1);
-    currentScene.add(directionalLight);
+    scene.add(directionalLight);
 
     // Управление вращением
     let isDragging = false;
     let previousMousePosition = { x: 0, y: 0 };
+    let model = null;
 
     // Обработчики событий
     const onPointerDown = (event) => {
+        event.stopPropagation();
         isDragging = true;
-        const clientX = event.clientX || event.touches[0].clientX;
-        const clientY = event.clientY || event.touches[0].clientY;
-        previousMousePosition = { x: clientX, y: clientY };
+        previousMousePosition = {
+            x: event.clientX || event.touches[0].clientX,
+            y: event.clientY || event.touches[0].clientY
+        };
     };
 
     const onPointerUp = () => {
@@ -91,7 +364,10 @@ function initModelViewer(container, modelPath) {
     };
 
     const onPointerMove = (event) => {
-        if (!isDragging || !currentModel) return;
+        if (!isDragging || !model) return;
+
+        event.preventDefault();
+        event.stopPropagation();
 
         const clientX = event.clientX || (event.touches && event.touches[0].clientX);
         const clientY = event.clientY || (event.touches && event.touches[0].clientY);
@@ -103,53 +379,42 @@ function initModelViewer(container, modelPath) {
             y: clientY - previousMousePosition.y
         };
 
-        currentModel.rotation.y += deltaMove.x * 0.01;
-        currentModel.rotation.x += deltaMove.y * 0.01;
+        model.rotation.y += deltaMove.x * 0.005;
+        model.rotation.x += deltaMove.y * 0.005;
 
         previousMousePosition = { x: clientX, y: clientY };
     };
 
-    canvas.addEventListener('mousedown', onPointerDown);
+    // Добавляем обработчики
+    canvas.addEventListener('mousedown', onPointerDown, { passive: false });
     canvas.addEventListener('touchstart', onPointerDown, { passive: false });
     window.addEventListener('mouseup', onPointerUp);
     window.addEventListener('touchend', onPointerUp);
-    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mousemove', onPointerMove, { passive: false });
     window.addEventListener('touchmove', onPointerMove, { passive: false });
 
-    // Resize Observer
+    // Ресайз
     const resizeObserver = new ResizeObserver(() => {
         updateRendererSize();
-        if (currentModel) fitCameraToModel();
+        if (model) fitCameraToModel();
     });
     resizeObserver.observe(container);
 
-    // Функции
-    function updateRendererSize() {
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-        currentRenderer.setSize(width, height, false);
-        currentCamera.aspect = width / height;
-        currentCamera.updateProjectionMatrix();
-    }
-
+    // Центрирование камеры
     function fitCameraToModel() {
-        if (!currentModel) return;
-
-        const box = new THREE.Box3().setFromObject(currentModel);
+        const box = new THREE.Box3().setFromObject(model);
         const size = box.getSize(new THREE.Vector3());
         const center = box.getCenter(new THREE.Vector3());
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        const fov = currentCamera.fov * (Math.PI / 100);
-        let cameraZ = Math.abs(maxDim / Math.sin(fov / 2));
+        const fov = camera.fov * (Math.PI / 100);
+        let cameraZ = Math.abs(maxDim / Math.sin(fov / 2)) * 1.1;
 
-        // Добавляем небольшой отступ
-        cameraZ *= 1.1;
-
-        currentCamera.position.z = cameraZ;
-        currentCamera.lookAt(center);
+        camera.position.z = cameraZ;
+        camera.lookAt(center);
     }
 
+    // Показать/скрыть загрузку
     function showLoading(show) {
         loadingElement.style.display = show ? 'block' : 'none';
     }
@@ -172,12 +437,12 @@ function initModelViewer(container, modelPath) {
         loader.load(
             modelPath,
             (gltf) => {
-                if (currentModel) currentScene.remove(currentModel);
+                if (model) scene.remove(model);
 
-                currentModel = gltf.scene;
+                model = gltf.scene;
 
-                // Настройка материалов и теней
-                currentModel.traverse((child) => {
+                // Настройка материалов
+                model.traverse((child) => {
                     if (child.isMesh) {
                         child.castShadow = true;
                         child.receiveShadow = true;
@@ -185,25 +450,50 @@ function initModelViewer(container, modelPath) {
                 });
 
                 // Центрирование и масштабирование
-                const box = new THREE.Box3().setFromObject(currentModel);
+                const box = new THREE.Box3().setFromObject(model);
                 const size = box.getSize(new THREE.Vector3());
                 const center = box.getCenter(new THREE.Vector3());
 
-                // Автоматическое масштабирование
                 const maxDim = Math.max(size.x, size.y, size.z);
                 const scale = 2.0 / maxDim;
-                currentModel.scale.set(scale, scale, scale);
+                model.scale.set(scale, scale, scale);
 
-                // Обновляем позицию после масштабирования
-                box.setFromObject(currentModel);
+                box.setFromObject(model);
                 const newCenter = box.getCenter(new THREE.Vector3());
-                currentModel.position.x -= newCenter.x;
-                currentModel.position.y -= newCenter.y;
-                currentModel.position.z -= newCenter.z;
+                model.position.x -= newCenter.x;
+                model.position.y -= newCenter.y;
+                model.position.z -= newCenter.z;
 
-                currentScene.add(currentModel);
+                scene.add(model);
                 fitCameraToModel();
                 showLoading(false);
+                
+                // Функция анимации
+                function animate() {
+                    sceneData.animationId = requestAnimationFrame(animate);
+                    renderer.render(scene, camera);
+                }
+                
+                // Сохраняем сцену для повторного использования
+                const sceneData = {
+                    scene,
+                    camera,
+                    renderer,
+                    model,
+                    canvas: canvas,
+                    resizeObserver,
+                    onPointerDown,
+                    onPointerUp,
+                    onPointerMove,
+                    animationId: null,
+                    modelPath,
+                    animate
+                };
+                
+                // Запускаем анимацию
+                sceneData.animationId = requestAnimationFrame(animate);
+                
+                modelScenes.set(swiperId, sceneData);
             },
             undefined,
             (error) => {
@@ -214,13 +504,6 @@ function initModelViewer(container, modelPath) {
         );
     }
 
-    // Анимация
-    function animate() {
-        requestAnimationFrame(animate);
-        currentRenderer.render(currentScene, currentCamera);
-    }
-
-    // Начинаем загрузку и анимацию
+    // Запуск загрузки модели
     loadModel();
-    animate();
 }
