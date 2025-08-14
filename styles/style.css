@@ -147,7 +147,7 @@ button:focus {
     position: relative;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 10px;
 }
 .check-label span {
@@ -188,6 +188,7 @@ button:focus {
     border-radius: 2px;
     position: relative;
     flex-shrink: 0;
+    margin-top: 2px;
 }
 
 .container {

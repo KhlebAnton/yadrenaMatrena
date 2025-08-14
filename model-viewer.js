@@ -191,7 +191,9 @@ function initProductSwiper(container) {
             swiper: previewSwiper
         },
         simulateTouch: false,
-        preventInteractionOnTransition: true
+    touchRatio: 0, // полностью отключает реакцию на касания
+    noSwiping: true, // предотвращает свайп
+    preventInteractionOnTransition: true
     });
 
     // Обработка 3D моделей
