@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
 
         form.querySelector('.form-wrapper').style.display = 'none';
-        form,this.querySelector('.succes_form-msg').style.display = 'flex';
+        form.querySelector('.succes_form-msg').style.display = 'flex';
     })
  });
 
