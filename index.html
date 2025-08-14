@@ -5,12 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/intlTelInput.min.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
-
+    <svg class="noise-filter">
+        <filter id="noise" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="1" stitchTiles="stitch" result="noise" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 
+                                             0 0 0 0 0 
+                                             0 0 0 0 0 
+                                             0 0 0 1 0" />
+        </filter>
+    </svg>
     <header class="header">
         <div class="header-container container">
 
@@ -42,7 +51,7 @@
                 </svg>
             </a>
             <div class="header-item-wrapper">
-                <a href="#form" class="btn btn-primary">Предзаказ</a>
+                <a href="#catalog" class="btn btn-primary">Предзаказ</a>
 
             </div>
             <div class="hamburger" data-btn="menu">
@@ -69,7 +78,7 @@
                 <p class="hero-text">
                     Уникальные арт-оболочки для Яндекс Станции. Технология, спрятанная в культуре
                 </p>
-                <a href="#form" class="btn btn-primary hero-btn">Хочу такую!</a>
+                <a href="#catalog" class="btn btn-primary hero-btn">Хочу такую!</a>
 
                 <div class="hero-carousel">
                     <div class="hero-slide">
@@ -92,6 +101,7 @@
             </div>
         </section>
         <section class=" red_section">
+            <div class="noise-overlay"></div>
             <div class="animation-wrapper">
                 <div class="history_container container">
                     <div class="history_left" data-animation="right">
@@ -222,7 +232,7 @@
                 </div>
             </div>
         </section>
-        <section class="section_product">
+        <section id="catalog" class="section_product">
             <div class="container">
                 <h2>
                     Каждая — с лицом. С характером. С голосом
@@ -303,8 +313,8 @@
 
                     <div class="product-content_swiper swiper">
                         <div class="product-content_swiper-wrapper swiper-wrapper ">
-                            <div class="product-card swiper-slide" data-btn="product" data-product-collection="Вежливые люди"
-                                data-product-model="Она хотела стать моделью">
+                            <div class="product-card swiper-slide" data-btn="product"
+                                data-product-collection="Вежливые люди" data-product-model="Она хотела стать моделью">
                                 <img src="./images/card_product/1.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Она хотела стать моделью
@@ -314,8 +324,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Вежливые люди"
-                                data-product-model="ЧВК">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Вежливые люди" data-product-model="ЧВК">
                                 <img src="./images/card_product/2.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     ЧВК
@@ -325,8 +335,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Вежливые люди"
-                                data-product-model="На страже">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Вежливые люди" data-product-model="На страже">
                                 <img src="./images/card_product/3.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     На страже
@@ -336,8 +346,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Вежливые люди"
-                                data-product-model="Да летчик я!">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Вежливые люди" data-product-model="Да летчик я!">
                                 <img src="./images/card_product/4.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Да летчик я!
@@ -347,8 +357,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Вежливые люди"
-                                data-product-model="Go go go">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Вежливые люди" data-product-model="Go go go">
                                 <img src="./images/card_product/5.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Go go go
@@ -358,8 +368,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Вежливые люди"
-                                data-product-model="ЧВК2">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Вежливые люди" data-product-model="ЧВК2">
                                 <img src="./images/card_product/6.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     ЧВК2
@@ -369,8 +379,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Вежливые люди"
-                                data-product-model="ЧВК3">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Вежливые люди" data-product-model="ЧВК3">
                                 <img src="./images/card_product/7.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     ЧВК3
@@ -380,8 +390,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Вежливые люди"
-                                data-product-model="Танкист">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Вежливые люди" data-product-model="Танкист">
                                 <img src="./images/card_product/8.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Танкист
@@ -391,7 +401,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Вежливые люди"
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Вежливые люди"
                                 data-product-model="Она хотела стать моделью в ковид">
                                 <img src="./images/card_product/9.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
@@ -403,8 +414,8 @@
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
 
-                            <div class="product-card swiper-slide" data-btn="product" data-product-collection="Славянский шик"
-                                data-product-model="Славянка">
+                            <div class="product-card swiper-slide" data-btn="product"
+                                data-product-collection="Славянский шик" data-product-model="Славянка">
                                 <img src="./images/card_product/1.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Славянка
@@ -414,8 +425,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Славянский шик"
-                                data-product-model="Славянка 2">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Славянский шик" data-product-model="Славянка 2">
                                 <img src="./images/card_product/1.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Славянка 2
@@ -426,8 +437,8 @@
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
 
-                            <div class="product-card swiper-slide" data-btn="product" data-product-collection="Из дома Сёгунов"
-                                data-product-model="Славянка">
+                            <div class="product-card swiper-slide" data-btn="product"
+                                data-product-collection="Из дома Сёгунов" data-product-model="Славянка">
                                 <img src="./images/products/5.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Сёгун
@@ -437,8 +448,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Из дома Сёгунов"
-                                data-product-model="Славянка 2">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Из дома Сёгунов" data-product-model="Славянка 2">
                                 <img src="./images/products/2.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Сёгун 2
@@ -449,8 +460,8 @@
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
 
-                            <div class="product-card swiper-slide" data-btn="product" data-product-collection="Внутри Востока"
-                                data-product-model="Славянка">
+                            <div class="product-card swiper-slide" data-btn="product"
+                                data-product-collection="Внутри Востока" data-product-model="Славянка">
                                 <img src="./images/products/5.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Восток
@@ -460,8 +471,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Внутри Востока"
-                                data-product-model="Славянка 2">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Внутри Востока" data-product-model="Славянка 2">
                                 <img src="./images/products/2.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Восток 2
@@ -472,8 +483,8 @@
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
 
-                            <div class="product-card swiper-slide" data-btn="product" data-product-collection="Ave, Мария"
-                                data-product-model="Мария">
+                            <div class="product-card swiper-slide" data-btn="product"
+                                data-product-collection="Ave, Мария" data-product-model="Мария">
                                 <img src="./images/products/4.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Мария
@@ -483,8 +494,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Ave, Мария"
-                                data-product-model="Мария 2">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Ave, Мария" data-product-model="Мария 2">
                                 <img src="./images/products/4.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Мария 2
@@ -494,8 +505,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="product-card swiper-slide" data-btn="product" data-product-collection="Культурный код"
-                                data-product-model="Культур">
+                            <div class="product-card swiper-slide" data-btn="product"
+                                data-product-collection="Культурный код" data-product-model="Культур">
                                 <img src="./images/products/4.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Культур
@@ -505,8 +516,8 @@
                                 </div>
                                 <button class="btn btn-primary">Предзаказ</button>
                             </div>
-                            <div class="swiper-slide product-card" data-btn="product" data-product-collection="Культурный код"
-                                data-product-model="Культур 2">
+                            <div class="swiper-slide product-card" data-btn="product"
+                                data-product-collection="Культурный код" data-product-model="Культур 2">
                                 <img src="./images/products/4.png" alt="" class="product-card_img">
                                 <div class="product-card_title">
                                     Культур 2
@@ -526,7 +537,7 @@
                                 <div class="product-card_price">
                                     5 999₽
                                 </div>
-                                <button class="btn btn-primary" >Предзаказ</button>
+                                <button class="btn btn-primary">Предзаказ</button>
                             </div>
                             <div class="swiper-slide product-card" data-btn="product" data-product-collection="Барыня"
                                 data-product-model="Барыня 2">
@@ -545,9 +556,224 @@
                 </div>
             </div>
         </section>
+        <section class="red_section layer-two">
+            <div class="noise-overlay"></div>
+            <div class="section-form-container container">
+                <div class="block-info">
+                    <h2>
+                        Будьте первыми, кто получит свою капсулу
+                    </h2>
+                    <p>
+                        Сейчас мы запускаем ограниченную партию. Выберите понравившийся стиль и оставьте заявку. Как
+                        только будет готова — мы сообщим.
+                    </p>
+                </div>
+                <form class="form">
+                    <div class="form-wrapper">
+                        <div class="input_container">
+                            <input type="name" placeholder="Имя" required>
+                            <input type="email" placeholder="Электронная почта" required>
+                            <input type="text" class="phone-input" name="phone" required="" autocomplete="off">
+                        </div>
+                        <button class="btn btn-primary">Оформить предзаказ</button>
+                        <div class="input_check-wrapper">
+                            <label class="check-label">
+                                <input type="checkbox" required>
+                                <div class="marker-checkbox"></div>
+                                <span>
+                                    Я принимаю условия <a href="#">Политики конфиденциальности</a>
+                                </span>
+                            </label>
+                            <label class="check-label">
+                                <input type="checkbox">
+                                <div class="marker-checkbox"></div>
+                                <span>
+                                    Я согласен(на) на получение рекламной рассылки
+                                </span>
+                            </label>
+                        </div>
+                    </div>
 
+                    <div class="succes_form-msg" style="display: none;">
+                        <h2>
+                            Заявка отправлена
+                        </h2>
+                        <p>Менеджер свяжеться в ближайшее время</p>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+        <section class="section-faq">
+            <div class="container flex-row">
+                <div class="faq-content">
+                    <h2>
+                        Популярные вопросы
+                    </h2>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-item_top">
+                                <p>
+                                    А если колонка новая выйдет?
+                                </p>
+                                <svg class="faq-arrow">
+                                    <use href="./images/sprite.svg#arrow"></use>
+                                </svg>
+                            </div>
+                            <div class="faq-item_hidden">
+                                <p>
+                                    Капсула останется предметом интерьера, слот внутри будет закрыт заглушкой с рисунком
+                                </p>
+                            </div>
+                        </div>
+                        <div class="faq-item is-open">
+                            <div class="faq-item_top">
+                                <p>
+                                    А она надежно держит колонку?
+                                </p>
+                                <svg class="faq-arrow">
+                                    <use href="./images/sprite.svg#arrow"></use>
+                                </svg>
+                            </div>
+                            <div class="faq-item_hidden">
+                                <p>
+                                    Капсула останется предметом интерьера, слот внутри будет закрыт заглушкой с рисунком
+                                </p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item_top">
+                                <p>
+                                    Это пластик?
+                                </p>
+                                <svg class="faq-arrow">
+                                    <use href="./images/sprite.svg#arrow"></use>
+                                </svg>
+                            </div>
+                            <div class="faq-item_hidden">
+                                <p>
+                                    Капсула останется предметом интерьера, слот внутри будет закрыт заглушкой с
+                                    рисункомКапсула останется предметом интерьера, слот внутри будет закрыт заглушкой с
+                                    рисункомКапсула останется предметом интерьера, слот внутри будет закрыт заглушкой с
+                                    рисунком
+                                </p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item_top">
+                                <p>
+                                    А краска не облезет?
+                                </p>
+                                <svg class="faq-arrow">
+                                    <use href="./images/sprite.svg#arrow"></use>
+                                </svg>
+                            </div>
+                            <div class="faq-item_hidden">
+                                <p>
+                                    Капсула останется предметом интерьера, слот внутри будет закрыт заглушкой с рисунком
+                                </p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-item_top">
+                                <p>
+                                    А где делаете?
+                                </p>
+                                <svg class="faq-arrow">
+                                    <use href="./images/sprite.svg#arrow"></use>
+                                </svg>
+                            </div>
+                            <div class="faq-item_hidden">
+                                <p>
+                                    Капсула останется предметом интерьера, слот внутри будет закрыт заглушкой с рисунком
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="faq_img" src="./images/products/6.png" alt="Русь">
+            </div>
+        </section>
+        <section class="section_social">
+            <div class="social-container container">
+                <h2>Не готовы выбрать сейчас? Подпишитесь — мы расскажем первыми о запуске.</h2>
+                <div class="social_links">
+                    <a href="#">
+                        <svg class="social-icon">
+                            <use href="./images/sprite.svg#vk"></use>
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg class="social-icon">
+                            <use href="./images/sprite.svg#tg"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
+    <footer class="footer">
+        <div class="noise-overlay"></div>
+        <div class="footer-container container">
+            <a href="#" class="logo_wrapper">
+                <svg class="logo_icon_snow" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="./images/sprite.svg#icon-logo-snow"></use>
+                </svg>
+                <svg class="logo_icon" width="235" height="36" viewBox="0 0 235 36">
+                    <use href="./images/sprite.svg#logo-icon"></use>
+                </svg>
+                <svg class="logo_icon_snow" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="./images/sprite.svg#icon-logo-snow"></use>
+                </svg>
+            </a>
+            <div class="footer_content">
+                <nav class="nav ">
+                    <a href="#" class="nav-item">
+                        О нас
+                    </a>
+                    <a href="#" class="nav-item">
+                        Качество
+                    </a>
+                    <a href="#" class="nav-item">
+                        Коллекция
+                    </a>
+                    <a href="#" class="nav-item">
+                        Вопросы
+                    </a>
+                </nav>
+                <div class="about-company">
+                    <span>
+                        ИП Дармограй Владислав Ростиславович
+                    </span>
+                    <span>
+ИНН 930700042271
+                    </span>
+                    <span>
+ОГРНИП 323930100300084
+                    </span>
+                </div>
+            </div>
+            <div class="footer_bottom">
+                <div class="footer_bottom-top">
+                    <span>
+                        2025. Все права защищены
+                    </span>
 
+                    <div class="politick_link">
+                        <a href="#">
+                            Политика конфиденциальности
+                        </a>
+                        <a href="#">
+                            Договор оферты
+                        </a>
+                    </div>
+                </div>
+                <span class="footer_text">
+                    сайта, вы соглашаетесь с условиями использования. В ином случае вам необходимо покинуть сайт. Сайт использует файлы cookies для взаимодействия с вами. Вы можете согласиться на использование cookies или заблокировать их использование, изменив настройки вашего интернет-браузера, следуя инструкции.
+                </span>
+            </div>
+        </div>
+    </footer>
 
 
 
@@ -621,7 +847,8 @@
                         <span>Выберите цвет:</span>
                         <div class="model_color_wrapper">
                             <div class="model_color-item" style="background: #FFFFFF;" data-model-color="white"></div>
-                            <div class="model_color-item is-active" style="background: #393939;" data-model-color="black"></div>
+                            <div class="model_color-item is-active" style="background: #393939;"
+                                data-model-color="black"></div>
                             <div class="model_color-item" style="background: #C9132A;" data-model-color="red"></div>
                             <div class="model_color-item"
                                 style="background: linear-gradient(143.9deg, #210089 7.91%, #750087 31.76%, #AF0173 53.05%, #FC1A02 71.36%, #FEED01 92.65%);"
@@ -677,7 +904,8 @@
                 <div class="product_popup_swiper">
 
 
-                    <div class="product_swiper-container" data-model-color="black" data-tab-station="Станция Мини 2" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="black" data-tab-station="Станция Мини 2"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
@@ -687,8 +915,8 @@
                                         <div class="model-container" data-object="./models/2.glb"
                                             data-preview="./images/products/1.png">
                                             <canvas class="model-viewer"></canvas>
-                                            <div class="loading">Loading model...</div>
-                                            <div class="error">Error loading model</div>
+                                            <div class="loading">Загрузка...</div>
+                                            <div class="error">Ошибка!</div>
                                         </div>
                                     </div>
                                     <!-- Слайд с изображением -->
@@ -767,22 +995,23 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                    <div class="product_swiper-container" data-model-color="black" data-tab-station="Станция Лайт" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="black" data-tab-station="Станция Лайт"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
                                 <div class="swiper-wrapper swiper-wrapper__main">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__main">
-                                         Станция Лайт картинка*
+                                        Станция Лайт картинка*
                                         <img src="./images/products/1.png" alt="Product Image 1">
-                                       
+
                                     </div>
                                     <div class="swiper-slide swiper-slide__main">
-                                          Станция Лайт картинка*
+                                        Станция Лайт картинка*
                                         <img src="./images/products/1.png" alt="Product Image 1">
                                     </div>
 
@@ -797,17 +1026,17 @@
                             <!-- Свайпер превью -->
                             <div class="product-swiper__preview swiper">
                                 <div class="swiper-wrapper swiper-wrapper__preview">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1.png" alt="Preview 1">
                                     </div>
 
-                                    
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1.png" alt="Preview 1">
                                     </div>
-                                    
+
 
 
                                     <!-- Дополнительные превью по аналогии -->
@@ -817,15 +1046,16 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                    <div class="product_swiper-container" data-model-color="black" data-tab-station="Станция Мини 3" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="black" data-tab-station="Станция Мини 3"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
                                 <div class="swiper-wrapper swiper-wrapper__main">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__main">
                                         Станция Мини 3 картинка*
                                         <img src="./images/products/1.png" alt="Product Image 1">
@@ -846,17 +1076,17 @@
                             <!-- Свайпер превью -->
                             <div class="product-swiper__preview swiper">
                                 <div class="swiper-wrapper swiper-wrapper__preview">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1.png" alt="Preview 1">
                                     </div>
 
-                                    
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1.png" alt="Preview 1">
                                     </div>
-                                    
+
 
 
                                     <!-- Дополнительные превью по аналогии -->
@@ -866,10 +1096,11 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
 
-                    <div class="product_swiper-container" data-model-color="red" data-tab-station="Станция Мини 2" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="red" data-tab-station="Станция Мини 2"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
@@ -879,8 +1110,8 @@
                                         <div class="model-container" data-object="./models/2-red.glb"
                                             data-preview="./images/products/1red.png">
                                             <canvas class="model-viewer"></canvas>
-                                            <div class="loading">Loading model...</div>
-                                            <div class="error">Error loading model</div>
+                                            <div class="loading">Загрузка...</div>
+                                            <div class="error">Ошибка!</div>
                                         </div>
                                     </div>
                                     <!-- Слайд с изображением -->
@@ -959,22 +1190,23 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                    <div class="product_swiper-container" data-model-color="red" data-tab-station="Станция Лайт" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="red" data-tab-station="Станция Лайт"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
                                 <div class="swiper-wrapper swiper-wrapper__main">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__main">
-                                         Станция Лайт картинка*
+                                        Станция Лайт картинка*
                                         <img src="./images/products/1red.png" alt="Product Image 1">
-                                       
+
                                     </div>
                                     <div class="swiper-slide swiper-slide__main">
-                                          Станция Лайт картинка*
+                                        Станция Лайт картинка*
                                         <img src="./images/products/1red.png" alt="Product Image 1">
                                     </div>
 
@@ -989,17 +1221,17 @@
                             <!-- Свайпер превью -->
                             <div class="product-swiper__preview swiper">
                                 <div class="swiper-wrapper swiper-wrapper__preview">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1red.png" alt="Preview 1">
                                     </div>
 
-                                    
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1red.png" alt="Preview 1">
                                     </div>
-                                    
+
 
 
                                     <!-- Дополнительные превью по аналогии -->
@@ -1009,15 +1241,16 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                    <div class="product_swiper-container" data-model-color="red" data-tab-station="Станция Мини 3" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="red" data-tab-station="Станция Мини 3"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
                                 <div class="swiper-wrapper swiper-wrapper__main">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__main">
                                         Станция Мини 3 картинка*
                                         <img src="./images/products/1red.png" alt="Product Image 1">
@@ -1038,17 +1271,17 @@
                             <!-- Свайпер превью -->
                             <div class="product-swiper__preview swiper">
                                 <div class="swiper-wrapper swiper-wrapper__preview">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1red.png" alt="Preview 1">
                                     </div>
 
-                                    
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1red.png" alt="Preview 1">
                                     </div>
-                                    
+
 
 
                                     <!-- Дополнительные превью по аналогии -->
@@ -1058,10 +1291,11 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
 
-                    <div class="product_swiper-container" data-model-color="white" data-tab-station="Станция Мини 2" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="white" data-tab-station="Станция Мини 2"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
@@ -1071,8 +1305,8 @@
                                         <div class="model-container" data-object="./models/2-wh.glb"
                                             data-preview="./images/products/1wh.png">
                                             <canvas class="model-viewer"></canvas>
-                                            <div class="loading">Loading model...</div>
-                                            <div class="error">Error loading model</div>
+                                            <div class="loading">Загрузка...</div>
+                                            <div class="error">Ошибка!</div>
                                         </div>
                                     </div>
                                     <!-- Слайд с изображением -->
@@ -1151,22 +1385,23 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                    <div class="product_swiper-container" data-model-color="white" data-tab-station="Станция Лайт" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="white" data-tab-station="Станция Лайт"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
                                 <div class="swiper-wrapper swiper-wrapper__main">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__main">
-                                         Станция Лайт картинка*
+                                        Станция Лайт картинка*
                                         <img src="./images/products/1wh.png" alt="Product Image 1">
-                                       
+
                                     </div>
                                     <div class="swiper-slide swiper-slide__main">
-                                          Станция Лайт картинка*
+                                        Станция Лайт картинка*
                                         <img src="./images/products/1wh.png" alt="Product Image 1">
                                     </div>
 
@@ -1181,17 +1416,17 @@
                             <!-- Свайпер превью -->
                             <div class="product-swiper__preview swiper">
                                 <div class="swiper-wrapper swiper-wrapper__preview">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1wh.png" alt="Preview 1">
                                     </div>
 
-                                    
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1wh.png" alt="Preview 1">
                                     </div>
-                                    
+
 
 
                                     <!-- Дополнительные превью по аналогии -->
@@ -1201,15 +1436,16 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                    <div class="product_swiper-container" data-model-color="white" data-tab-station="Станция Мини 3" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="white" data-tab-station="Станция Мини 3"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
                                 <div class="swiper-wrapper swiper-wrapper__main">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__main">
                                         Станция Мини 3 картинка*
                                         <img src="./images/products/1wh.png" alt="Product Image 1">
@@ -1230,17 +1466,17 @@
                             <!-- Свайпер превью -->
                             <div class="product-swiper__preview swiper">
                                 <div class="swiper-wrapper swiper-wrapper__preview">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1wh.png" alt="Preview 1">
                                     </div>
 
-                                    
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1wh.png" alt="Preview 1">
                                     </div>
-                                    
+
 
 
                                     <!-- Дополнительные превью по аналогии -->
@@ -1250,10 +1486,11 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
 
-                    <div class="product_swiper-container" data-model-color="gradient" data-tab-station="Станция Мини 2" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="gradient" data-tab-station="Станция Мини 2"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
@@ -1263,8 +1500,8 @@
                                         <div class="model-container" data-object="./models/2-gr.glb"
                                             data-preview="./images/products/1grad.png">
                                             <canvas class="model-viewer"></canvas>
-                                            <div class="loading">Loading model...</div>
-                                            <div class="error">Error loading model</div>
+                                            <div class="loading">Загрузка...</div>
+                                            <div class="error">Ошибка!</div>
                                         </div>
                                     </div>
                                     <!-- Слайд с изображением -->
@@ -1343,22 +1580,23 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                    <div class="product_swiper-container" data-model-color="gradient" data-tab-station="Станция Лайт" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="gradient" data-tab-station="Станция Лайт"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
                                 <div class="swiper-wrapper swiper-wrapper__main">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__main">
-                                         Станция Лайт картинка*
+                                        Станция Лайт картинка*
                                         <img src="./images/products/1grad.png" alt="Product Image 1">
-                                       
+
                                     </div>
                                     <div class="swiper-slide swiper-slide__main">
-                                          Станция Лайт картинка*
+                                        Станция Лайт картинка*
                                         <img src="./images/products/1grad.png" alt="Product Image 1">
                                     </div>
 
@@ -1373,17 +1611,17 @@
                             <!-- Свайпер превью -->
                             <div class="product-swiper__preview swiper">
                                 <div class="swiper-wrapper swiper-wrapper__preview">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1grad.png" alt="Preview 1">
                                     </div>
 
-                                    
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1grad.png" alt="Preview 1">
                                     </div>
-                                    
+
 
 
                                     <!-- Дополнительные превью по аналогии -->
@@ -1393,15 +1631,16 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                    <div class="product_swiper-container" data-model-color="gradient" data-tab-station="Станция Мини 3" style="display: none;">
+                    <div class="product_swiper-container" data-model-color="gradient" data-tab-station="Станция Мини 3"
+                        style="display: none;">
                         <div class="product-swiper">
                             <!-- Основной свайпер -->
                             <div class="product-swiper__main swiper">
                                 <div class="swiper-wrapper swiper-wrapper__main">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__main">
                                         Станция Мини 3 картинка*
                                         <img src="./images/products/1grad.png" alt="Product Image 1">
@@ -1422,17 +1661,17 @@
                             <!-- Свайпер превью -->
                             <div class="product-swiper__preview swiper">
                                 <div class="swiper-wrapper swiper-wrapper__preview">
-                                    
-                                    
+
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1grad.png" alt="Preview 1">
                                     </div>
 
-                                    
+
                                     <div class="swiper-slide swiper-slide__preview">
                                         <img src="./images/products/1grad.png" alt="Preview 1">
                                     </div>
-                                    
+
 
 
                                     <!-- Дополнительные превью по аналогии -->
@@ -1442,63 +1681,98 @@
                             </div>
                         </div>
 
-                       
+
                     </div>
-                   
-                     <span class="product_model-hint">
-                            Представленные изображения носят ознакомительный характер. Окончательный вид продукта может
-                            быть
-                            изменён
-                        </span>
+
+                    <span class="product_model-hint">
+                        Представленные изображения носят ознакомительный характер. Окончательный вид продукта может
+                        быть
+                        изменён
+                    </span>
                 </div>
 
             </div>
         </div>
     </div>
-    <div class="modal-overlay is-open" data-modal="productOrder">
+    <div class="modal-overlay " data-modal="productOrder">
         <div class="modal_popup">
             <svg class="modal-close">
                 <use href="./images/sprite.svg#close"></use>
             </svg>
-           <div class="order-product-container">
-            <div class="about-order-product">
-                <div class="order-product-img-wrapper">
-                    <img id="orderImg" src="./images/products/1.png" alt="">
+            <div class="order-product-container">
+                <div class="about-order-product">
+                    <div class="order-product-img-wrapper">
+                        <img id="orderImg" src="./images/products/1.png" alt="">
+                    </div>
+                    <div class="about-order-product-info">
+                        <div class="about_order-item">
+                            <span>
+                                Коллекция
+                            </span>
+                            <span id="orderCollection">
+                                Славянский шик
+                            </span>
+                        </div>
+                        <div class="about_order-item">
+                            <span>
+                                Модель
+                            </span>
+                            <span id="orderModel">
+                                Русский дух
+                            </span>
+                        </div>
+                        <div class="about_order-item">
+                            <span>
+                                Цвет
+                            </span>
+                            <div id="orderColor" class="order-product-color model_color-item "
+                                style="background-color: #393939;"></div>
+                        </div>
+                        <div class="about_order-item">
+                            <span>
+                                Для станции
+                            </span>
+                            <span id="orderStation">
+                                Лайт
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="about-order-product-info">
-                    <div class="about_order-item">
-                        <span>
-                            Коллекция
-                        </span>
-                        <span id="orderCollection">
-                            Славянский шик
-                        </span>
+                <form class="form">
+                    <div class="form-wrapper">
+                        <div class="input_container">
+                            <input type="name" placeholder="Имя" required>
+                            <input type="email" placeholder="Электронная почта" required>
+                            <input type="text" class="phone-input" name="phone" required="" autocomplete="off">
+                        </div>
+                        <button class="btn btn-primary">Оформить предзаказ</button>
+                        <div class="input_check-wrapper">
+                            <label class="check-label">
+                                <input type="checkbox" required>
+                                <div class="marker-checkbox"></div>
+                                <span>
+                                    Я принимаю условия <a href="#">Политики конфиденциальности</a>
+                                </span>
+                            </label>
+                            <label class="check-label">
+                                <input type="checkbox">
+                                <div class="marker-checkbox"></div>
+                                <span>
+                                    Я согласен(на) на получение рекламной рассылки
+                                </span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="about_order-item">
-                        <span>
-                            Модель
-                        </span>
-                        <span id="orderModel">
-                            Русский дух
-                        </span>
+
+                    <div class="succes_form-msg" style="display: none;">
+                        <h2>
+                            Заявка отправлена
+                        </h2>
+                        <p>Менеджер свяжеться в ближайшее время</p>
                     </div>
-                    <div class="about_order-item">
-                        <span>
-                            Цвет
-                        </span>
-                        <div id="orderColor" class="order-product-color model_color-item " style="background-color: #393939;"></div>
-                    </div>
-                    <div class="about_order-item">
-                        <span>
-                            Для станции
-                        </span>
-                        <span id="orderStation">
-                            Лайт
-                        </span>
-                    </div>
-                </div>
+
+                </form>
             </div>
-           </div>
         </div>
     </div>
 
@@ -1511,22 +1785,11 @@
 
 
 
-    <!-- Контейнер с моделью (укажите свой путь к модели) -->
-    <!-- <div class="model-container" data-object="models/1.glb">
-        <canvas class="model-viewer"></canvas>
-        <div class="loading">Loading model...</div>
-        <div class="error">Error loading model</div>
-    </div>
-     <div class="model-container" data-object="models/2.glb">
-        <canvas class="model-viewer"></canvas>
-        <div class="loading">Loading model...</div>
-        <div class="error">Error loading model</div>
-    </div> -->
 
-    <!-- Three.js и необходимые компоненты -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js" id="jquery-js-js"></script>
+
+    <script src="./scripts/intlTelInput.min.js"></script>
+
 
     <script src="model-viewer.js"></script>
 

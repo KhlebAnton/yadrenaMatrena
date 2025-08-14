@@ -159,11 +159,11 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             if (modalId === 'productOrder') {
-                
+
                 document.getElementById('orderImg').src = productOrderInfo.img;
                 document.getElementById('orderCollection').textContent = productOrderInfo.collection;
                 document.getElementById('orderModel').textContent = productOrderInfo.model;
-                
+
             }
         }
 
@@ -185,40 +185,40 @@ document.addEventListener('DOMContentLoaded', function () {
         if (openBtn) {
             openBtn.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    if(btn.getAttribute('data-btn') === 'product') {
+                    if (btn.getAttribute('data-btn') === 'product') {
                         let nameProduct = btn.getAttribute('data-product-model');
                         console.log(nameProduct);
                         openModal(nameProduct);
 
                         productOrderInfo.img = btn.querySelector('.product-card_img').src;
-                         productOrderInfo.collection = btn.getAttribute('data-product-collection');
+                        productOrderInfo.collection = btn.getAttribute('data-product-collection');
                         productOrderInfo.model = btn.getAttribute('data-product-model');
 
 
-                    } else if (btn.getAttribute('data-btn') === 'productOrder')   {
+                    } else if (btn.getAttribute('data-btn') === 'productOrder') {
                         console.log('order');
                         document.querySelectorAll('.model_color-item').forEach(color => {
-                            if(color.classList.contains('is-active')) {
+                            if (color.classList.contains('is-active')) {
                                 productOrderInfo.color = color.style.background;
                             }
 
                             document.getElementById('orderColor').style.background = productOrderInfo.color;
                         });
                         document.querySelectorAll('.model-station-tab').forEach(station => {
-                            if(station.classList.contains('is-active')) {
+                            if (station.classList.contains('is-active')) {
                                 productOrderInfo.station = station.getAttribute('data-tab-station').replace("Станция ", "");
                             }
 
                             document.getElementById('orderStation').textContent = productOrderInfo.station;
                         })
-                         openModal();
+                        openModal();
 
                     } else {
                         openModal()
                     }
-                    
 
-                    
+
+
                 })
 
 
@@ -336,7 +336,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+    const phoneInputs = document.querySelectorAll('.phone-input');
+    if (phoneInputs.length) {
+        phoneInputs.forEach(input => {
+            var iti = window.intlTelInput(input, {
+                nationalMode: true,
+                initialCountry: 'auto',
+                geoIpLookup: function (callback) {
+                    jQuery.get('https://ipinfo.io', function () { }, 'jsonp').always(function (resp) {
+                        var countryCode = resp && resp.country ? resp.country : 'us';
+                        callback(countryCode);
+                    });
+                },
+                utilsScript: './scripts/utils.js',
+                preferredCountries: ['ru']
+            });
+            var handleChange = function () {
+                var text = iti.isValidNumber() ? iti.getNumber() : '';
+                iti.setNumber(text);
+                input.value = text;
+            };
+            input.addEventListener('mouseleave', handleChange);
+            input.addEventListener('change', handleChange);
+        });
+    }
 
+
+ document.querySelectorAll('.form').forEach(form => {
+    form.addEventListener('submit', (e)=> {
+        e.preventDefault();
+
+        form.querySelector('.form-wrapper').style.display = 'none';
+        form,this.querySelector('.succes_form-msg').style.display = 'flex';
+    })
+ });
+
+ const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+       
+        
+        item.addEventListener('click', function() {
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('is-open');
+                }
+            });
+            
+            item.classList.toggle('is-open');
+        });
+    });
 
 
 });

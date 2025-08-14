@@ -82,7 +82,8 @@ function initStationTabs() {
 // Обновление видимых свайперов
 function updateVisibleSwipers(color = null, station = null) {
     // Получаем текущие активные табы, если параметры не переданы
-    if (color === null) {
+    setTimeout(() => {
+       if (color === null) {
         const activeColor = document.querySelector('.model_color-item.is-active');
         color = activeColor ? activeColor.getAttribute('data-model-color') : 'black';
     }
@@ -140,6 +141,8 @@ function updateVisibleSwipers(color = null, station = null) {
             }
         }
     });
+    }, 100);
+    
 }
 
 // Инициализация видимых свайперов при загрузке
@@ -283,31 +286,58 @@ function cleanupScene(sceneData) {
     }
     
     if (sceneData.renderer) {
+        // Важно: сначала остановить анимацию, затем освободить ресурсы
+        cancelAnimationFrame(sceneData.animationId);
         sceneData.renderer.dispose();
+        sceneData.renderer.forceContextLoss();
+        sceneData.renderer.context = null;
+        sceneData.renderer.domElement = null;
     }
     
+    // Очистка сцены и материалов
     if (sceneData.scene) {
-        while (sceneData.scene.children.length > 0) {
-            sceneData.scene.remove(sceneData.scene.children[0]);
-        }
+        sceneData.scene.traverse(child => {
+            if (child.material) {
+                child.material.dispose();
+            }
+            if (child.geometry) {
+                child.geometry.dispose();
+            }
+        });
+        sceneData.scene.children = [];
     }
     
-    // Удаляем обработчики событий
+    // Удаление обработчиков событий
     const canvas = sceneData.canvas;
-    canvas.removeEventListener('mousedown', sceneData.onPointerDown);
-    canvas.removeEventListener('touchstart', sceneData.onPointerDown);
+    if (canvas) {
+        canvas.removeEventListener('mousedown', sceneData.onPointerDown);
+        canvas.removeEventListener('touchstart', sceneData.onPointerDown);
+    }
     window.removeEventListener('mouseup', sceneData.onPointerUp);
     window.removeEventListener('touchend', sceneData.onPointerUp);
     window.removeEventListener('mousemove', sceneData.onPointerMove);
     window.removeEventListener('touchmove', sceneData.onPointerMove);
-    
-    // Останавливаем анимацию
-    cancelAnimationFrame(sceneData.animationId);
 }
 
 // Инициализация просмотрщика модели
 function initModelViewer(container, modelPath, swiperId) {
     const canvas = container.querySelector('.model-viewer');
+    canvas.addEventListener('webglcontextlost', (event) => {
+        event.preventDefault();
+        console.warn('WebGL context lost');
+        if (modelScenes.has(swiperId)) {
+            const sceneData = modelScenes.get(swiperId);
+            cancelAnimationFrame(sceneData.animationId);
+        }
+    });
+    
+    canvas.addEventListener('webglcontextrestored', () => {
+        console.log('WebGL context restored');
+        if (modelScenes.has(swiperId)) {
+            const sceneData = modelScenes.get(swiperId);
+            sceneData.animationId = requestAnimationFrame(sceneData.animate);
+        }
+    });
     const loadingElement = container.querySelector('.loading');
     const errorElement = container.querySelector('.error');
 
