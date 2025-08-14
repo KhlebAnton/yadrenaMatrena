@@ -242,13 +242,16 @@ document.addEventListener('DOMContentLoaded', function () {
     //   анимации
     const animatedElements = document.querySelectorAll('[data-animation]');
 
-    function isElementInViewport(el, offset = 100) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) - offset &&
-            rect.bottom >= 0
-        );
-    }
+    function isElementInViewport(el, percent = 30) {
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const offset = windowHeight * percent / 100;
+    
+    return (
+        rect.top <= windowHeight - offset &&
+        rect.bottom >= 0
+    );
+}
 
     function handleAnimation() {
         animatedElements.forEach(el => {
@@ -256,8 +259,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const animationType = el.getAttribute('data-animation');
 
                 if (animationType === 'right') {
-                    el.style.transition = 'transform 1s ease-out';
+                     el.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
                     el.style.transform = 'translateX(0)';
+                      el.style.opacity = '1';
                 } else if (animationType === 'opacity_top') {
                     el.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
                     el.style.opacity = '1';
@@ -273,6 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const animationType = el.getAttribute('data-animation');
         if (animationType === 'right') {
             el.style.transform = 'translateX(200px)';
+            el.style.opacity = '0';
         } else if (animationType === 'opacity_top') {
             el.style.opacity = '0';
             el.style.transform = 'translateY(50px)';

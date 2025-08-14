@@ -191,9 +191,9 @@ function initProductSwiper(container) {
             swiper: previewSwiper
         },
         simulateTouch: false,
-    touchRatio: 0, // полностью отключает реакцию на касания
-    noSwiping: true, // предотвращает свайп
-    preventInteractionOnTransition: true
+        touchRatio: 0, // полностью отключает реакцию на касания
+        noSwiping: true, // предотвращает свайп
+        preventInteractionOnTransition: true
     });
 
     // Обработка 3D моделей
@@ -340,6 +340,10 @@ function initModelViewer(container, modelPath, swiperId) {
         return;
     }
     const canvas = container.querySelector('.model-viewer');
+     container.style.position = 'relative';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    
     canvas.addEventListener('webglcontextlost', (event) => {
         event.preventDefault();
         console.warn('WebGL context lost');
@@ -371,16 +375,23 @@ function initModelViewer(container, modelPath, swiperId) {
         antialias: true,
         alpha: true
     });
+    setTimeout(() => updateRendererSize(), 0);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.setPixelRatio(window.devicePixelRatio);
 
     function updateRendererSize() {
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
-        renderer.setSize(width, height, false);
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
+
+        // Only update if dimensions are valid and have changed
+        if (width > 0 && height > 0 &&
+            (canvas.width !== width || canvas.height !== height)) {
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        }
     }
+    
 
     updateRendererSize();
 
@@ -442,10 +453,14 @@ function initModelViewer(container, modelPath, swiperId) {
     window.addEventListener('touchmove', onPointerMove, { passive: false });
 
     // Ресайз
-    const resizeObserver = new ResizeObserver(() => {
+    let resizeTimeout;
+const resizeObserver = new ResizeObserver(() => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
         updateRendererSize();
         if (model) fitCameraToModel();
-    });
+    }, 100);
+});
     resizeObserver.observe(container);
 
     // Центрирование камеры
