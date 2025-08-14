@@ -1,8 +1,12 @@
 // Инициализация после загрузки DOM и всех скриптов
 document.addEventListener('DOMContentLoaded', function () {
-    // Проверяем, загружен ли Three.js
     if (typeof THREE === 'undefined') {
-        loadThreeJS().then(initAll);
+        loadThreeJS()
+            .then(initAll)
+            .catch(error => {
+                console.error('Failed to load Three.js:', error);
+                // Можно добавить fallback или сообщение об ошибке
+            });
     } else {
         initAll();
     }
@@ -17,17 +21,23 @@ function loadThreeJS() {
             'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/DRACOLoader.js'
         ];
 
-        let loaded = 0;
+        function loadScript(index) {
+            if (index >= scripts.length) {
+                resolve();
+                return;
+            }
 
-        scripts.forEach(src => {
             const script = document.createElement('script');
-            script.src = src;
-            script.onload = () => {
-                loaded++;
-                if (loaded === scripts.length) resolve();
+            script.src = scripts[index];
+            script.onload = () => loadScript(index + 1);
+            script.onerror = () => {
+                console.error(`Failed to load script: ${scripts[index]}`);
+                loadScript(index + 1); // Продолжаем даже при ошибке
             };
             document.head.appendChild(script);
-        });
+        }
+
+        loadScript(0);
     });
 }
 
@@ -44,16 +54,16 @@ function initAll() {
 // Инициализация цветовых табов
 function initColorTabs() {
     const colorItems = document.querySelectorAll('.model_color-item');
-    
+
     colorItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             const color = this.getAttribute('data-model-color');
-            
+
             // Удаляем активный класс у всех
             colorItems.forEach(i => i.classList.remove('is-active'));
             // Добавляем активный класс текущему
             this.classList.add('is-active');
-            
+
             // Показываем соответствующие свайперы
             updateVisibleSwipers(color);
         });
@@ -63,16 +73,16 @@ function initColorTabs() {
 // Инициализация табов станций
 function initStationTabs() {
     const stationTabs = document.querySelectorAll('.model-station-tab');
-    
+
     stationTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function () {
             const station = this.getAttribute('data-tab-station');
-            
+
             // Удаляем активный класс у всех
             stationTabs.forEach(t => t.classList.remove('is-active'));
             // Добавляем активный класс текущему
             this.classList.add('is-active');
-            
+
             // Показываем соответствующие свайперы
             updateVisibleSwipers(null, station);
         });
@@ -83,66 +93,66 @@ function initStationTabs() {
 function updateVisibleSwipers(color = null, station = null) {
     // Получаем текущие активные табы, если параметры не переданы
     setTimeout(() => {
-       if (color === null) {
-        const activeColor = document.querySelector('.model_color-item.is-active');
-        color = activeColor ? activeColor.getAttribute('data-model-color') : 'black';
-    }
-    
-    if (station === null) {
-        const activeStation = document.querySelector('.model-station-tab.is-active');
-        station = activeStation ? activeStation.getAttribute('data-tab-station') : 'Станция Мини 2';
-    }
-    
-    // Скрываем все свайперы
-    document.querySelectorAll('.product_swiper-container').forEach(container => {
-        container.style.display = 'none';
-         stopAllVideos(container);
-        // При скрытии останавливаем рендеринг для этого контейнера
-        const swiperId = container.id;
-        if (modelScenes.has(swiperId)) {
-            const sceneData = modelScenes.get(swiperId);
-            cancelAnimationFrame(sceneData.animationId);
+        if (color === null) {
+            const activeColor = document.querySelector('.model_color-item.is-active');
+            color = activeColor ? activeColor.getAttribute('data-model-color') : 'black';
         }
-    });
-    
-    // Показываем только нужные
-    const visibleSelector = `.product_swiper-container[data-model-color="${color}"][data-tab-station="${station}"]`;
-    const visibleContainers = document.querySelectorAll(visibleSelector);
-    
-    visibleContainers.forEach(container => {
-        // Генерируем уникальный ID для контейнера, если его нет
-        if (!container.id) {
-            container.id = 'swiper-' + Math.random().toString(36).substr(2, 9);
+
+        if (station === null) {
+            const activeStation = document.querySelector('.model-station-tab.is-active');
+            station = activeStation ? activeStation.getAttribute('data-tab-station') : 'Станция Мини 2';
         }
-        
-        container.style.display = '';
-        
-        // Если свайпер еще не инициализирован, инициализируем его
-        if (!container.hasAttribute('data-swiper-initialized')) {
-            initProductSwiper(container);
-            container.setAttribute('data-swiper-initialized', 'true');
-        } else {
-            // Если свайпер уже инициализирован, возобновляем рендеринг
+
+        // Скрываем все свайперы
+        document.querySelectorAll('.product_swiper-container').forEach(container => {
+            container.style.display = 'none';
+            stopAllVideos(container);
+            // При скрытии останавливаем рендеринг для этого контейнера
             const swiperId = container.id;
             if (modelScenes.has(swiperId)) {
                 const sceneData = modelScenes.get(swiperId);
-                sceneData.animationId = requestAnimationFrame(sceneData.animate);
-                
-                // Восстанавливаем canvas в DOM
-                const modelContainer = container.querySelector('.model-container');
-                if (modelContainer) {
-                    const existingCanvas = modelContainer.querySelector('.model-viewer');
-                    if (existingCanvas) {
-                        existingCanvas.replaceWith(sceneData.canvas);
-                    } else {
-                        modelContainer.appendChild(sceneData.canvas);
+                cancelAnimationFrame(sceneData.animationId);
+            }
+        });
+
+        // Показываем только нужные
+        const visibleSelector = `.product_swiper-container[data-model-color="${color}"][data-tab-station="${station}"]`;
+        const visibleContainers = document.querySelectorAll(visibleSelector);
+
+        visibleContainers.forEach(container => {
+            // Генерируем уникальный ID для контейнера, если его нет
+            if (!container.id) {
+                container.id = 'swiper-' + Math.random().toString(36).substr(2, 9);
+            }
+
+            container.style.display = '';
+
+            // Если свайпер еще не инициализирован, инициализируем его
+            if (!container.hasAttribute('data-swiper-initialized')) {
+                initProductSwiper(container);
+                container.setAttribute('data-swiper-initialized', 'true');
+            } else {
+                // Если свайпер уже инициализирован, возобновляем рендеринг
+                const swiperId = container.id;
+                if (modelScenes.has(swiperId)) {
+                    const sceneData = modelScenes.get(swiperId);
+                    sceneData.animationId = requestAnimationFrame(sceneData.animate);
+
+                    // Восстанавливаем canvas в DOM
+                    const modelContainer = container.querySelector('.model-container');
+                    if (modelContainer) {
+                        const existingCanvas = modelContainer.querySelector('.model-viewer');
+                        if (existingCanvas) {
+                            existingCanvas.replaceWith(sceneData.canvas);
+                        } else {
+                            modelContainer.appendChild(sceneData.canvas);
+                        }
                     }
                 }
             }
-        }
-    });
+        });
     }, 100);
-    
+
 }
 
 // Инициализация видимых свайперов при загрузке
@@ -153,22 +163,22 @@ function initVisibleSwipers() {
 // Инициализация одного продукта-свайпера
 function initProductSwiper(container) {
     // Сначала инициализируем превью
-   const previewSwiper = new Swiper(container.querySelector('.product-swiper__preview'), {
-    spaceBetween: 10,
-    slidesPerView: 'auto',
-    direction: 'horizontal', // По умолчанию вертикальный
-    navigation: {
-        nextEl: container.querySelector('.swiper__preview-button-next'),
-        prevEl: container.querySelector('.swiper__preview-button-prev'),
-    },
-    breakpoints: {
-        // При ширине экрана меньше 1350px
-        1350: {
-            direction: 'vertical', // Меняем на горизонтальный
-           
+    const previewSwiper = new Swiper(container.querySelector('.product-swiper__preview'), {
+        spaceBetween: 10,
+        slidesPerView: 'auto',
+        direction: 'horizontal', // По умолчанию вертикальный
+        navigation: {
+            nextEl: container.querySelector('.swiper__preview-button-next'),
+            prevEl: container.querySelector('.swiper__preview-button-prev'),
+        },
+        breakpoints: {
+            // При ширине экрана меньше 1350px
+            1350: {
+                direction: 'vertical', // Меняем на горизонтальный
+
+            }
         }
-    }
-});
+    });
 
     // Затем основной свайпер
     const mainSwiper = new Swiper(container.querySelector('.product-swiper__main'), {
@@ -220,7 +230,7 @@ function initProductSwiper(container) {
             video.pause();
             btn.style.display = '';
         }
-        
+
         function videoStop() {
             video.pause();
             btn.style.display = '';
@@ -259,7 +269,7 @@ function showModel(modelPath, container, swiperId) {
             modelScenes.delete(swiperId);
         }
     }
-    
+
     // Загружаем новую модель
     initModelViewer(container, modelPath, swiperId);
 }
@@ -274,7 +284,7 @@ function activateScene(sceneData, container) {
     }
     sceneData.canvas.style.display = '';
     sceneData.resizeObserver.observe(container);
-    
+
     // Возобновляем анимацию
     sceneData.animationId = requestAnimationFrame(sceneData.animate);
 }
@@ -284,7 +294,7 @@ function cleanupScene(sceneData) {
     if (sceneData.resizeObserver) {
         sceneData.resizeObserver.disconnect();
     }
-    
+
     if (sceneData.renderer) {
         // Важно: сначала остановить анимацию, затем освободить ресурсы
         cancelAnimationFrame(sceneData.animationId);
@@ -293,7 +303,7 @@ function cleanupScene(sceneData) {
         sceneData.renderer.context = null;
         sceneData.renderer.domElement = null;
     }
-    
+
     // Очистка сцены и материалов
     if (sceneData.scene) {
         sceneData.scene.traverse(child => {
@@ -306,7 +316,7 @@ function cleanupScene(sceneData) {
         });
         sceneData.scene.children = [];
     }
-    
+
     // Удаление обработчиков событий
     const canvas = sceneData.canvas;
     if (canvas) {
@@ -321,6 +331,12 @@ function cleanupScene(sceneData) {
 
 // Инициализация просмотрщика модели
 function initModelViewer(container, modelPath, swiperId) {
+    // Проверяем наличие THREE и необходимых компонентов
+    if (typeof THREE === 'undefined' || !THREE.GLTFLoader) {
+        console.error('Three.js or its components are not loaded');
+        setTimeout(() => initModelViewer(container, modelPath, swiperId), 100);
+        return;
+    }
     const canvas = container.querySelector('.model-viewer');
     canvas.addEventListener('webglcontextlost', (event) => {
         event.preventDefault();
@@ -330,7 +346,7 @@ function initModelViewer(container, modelPath, swiperId) {
             cancelAnimationFrame(sceneData.animationId);
         }
     });
-    
+
     canvas.addEventListener('webglcontextrestored', () => {
         console.log('WebGL context restored');
         if (modelScenes.has(swiperId)) {
@@ -355,7 +371,7 @@ function initModelViewer(container, modelPath, swiperId) {
     });
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.setPixelRatio(window.devicePixelRatio);
-    
+
     function updateRendererSize() {
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
@@ -363,7 +379,7 @@ function initModelViewer(container, modelPath, swiperId) {
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
     }
-    
+
     updateRendererSize();
 
     // Освещение
@@ -497,13 +513,13 @@ function initModelViewer(container, modelPath, swiperId) {
                 scene.add(model);
                 fitCameraToModel();
                 showLoading(false);
-                
+
                 // Функция анимации
                 function animate() {
                     sceneData.animationId = requestAnimationFrame(animate);
                     renderer.render(scene, camera);
                 }
-                
+
                 // Сохраняем сцену для повторного использования
                 const sceneData = {
                     scene,
@@ -519,10 +535,10 @@ function initModelViewer(container, modelPath, swiperId) {
                     modelPath,
                     animate
                 };
-                
+
                 // Запускаем анимацию
                 sceneData.animationId = requestAnimationFrame(animate);
-                
+
                 modelScenes.set(swiperId, sceneData);
             },
             undefined,
