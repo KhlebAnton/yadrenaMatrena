@@ -1776,6 +1776,16 @@ background: #E3DCCB;
     .section_social {
         padding: 60px 0;
     }
+    .faq-item {
+        padding: 10px;
+        border-radius: 4px;
+    }
+    .faq-item p {
+        font-size: 16px;
+    }
+    .faq-content {
+        gap: 20px;
+    }
     .section_social .social-icon {
     width: 48px;
     height: 48px;
