@@ -3327,7 +3327,7 @@ display: flex;
 }
 
 @media (max-width:1450px) {
-    h1 {
+    h1.hero-title {
         font-size: 120px;
     }
 
@@ -3673,7 +3673,7 @@ display: flex;
         margin-top: 16px;
     }
 
-    h1 {
+    h1.hero-title {
         font-size: 64px;
     }
 
