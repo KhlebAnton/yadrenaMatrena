@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/intlTelInput.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <svg class="noise-filter">
+        <filter id="noise" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="1" stitchTiles="stitch" result="noise" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 
+                                             0 0 0 0 0 
+                                             0 0 0 0 0 
+                                             0 0 0 1 0" />
+        </filter>
+    </svg>
+    
+    <main class="main">
+        <section class="order_page">
+            <div class="container">
+                <nav class="breadcrumbs">
+                    <a href="/">Главная</a>
+                    <a href="#">Оформление заказа</a>
+                </nav>
+                <div class="order_page_content">
+                    <h1 class="section_title">Оформление заказа</h1>
+                    <form class="order_page__grid order_form" novalidate>
+                        <div class="order_page__grid_left ">
+                            <div class="order_page_contact_item">
+
+                                <h3 class="order_page_contact_item__title">
+                                    Город
+                                </h3>
+                                <div class="order_page_contact_item__content">
+                                    <div class="order_page_contact__city">
+                                        <span class="order_page_contact__city_title">
+                                            Москва
+                                        </span>
+                                        <input type="text" class="hidden_input" readonly required name="city"
+                                            value="Москва">
+                                        <button type="button" class="btn btn_line"
+                                            data-btn="city_order">Изменить</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_page_contact_item">
+
+                                <h3 class="order_page_contact_item__title">
+                                    Способ доставки
+                                </h3>
+                                <div class="order_page_contact_item__content">
+                                    <div class="order_page_contact__delivery">
+                                        <div class="order_page_contact__delivery_item">
+                                            <div class="order_page_contact__delivery_item__top">
+                                                <label class="label_radio">
+                                                    <input type="radio" class="input_radio" name="delivery" checked>
+                                                    <div class="marker_radio"></div>
+                                                    <span>До ПВЗ СДЭК</span>
+                                                    <button type="button" class="btn btn_line"
+                                                        data-btn="delivery_pvz">Выбрать
+                                                        ПВЗ</button>
+
+                                                </label>
+                                                <div class="order_page_contact__delivery_item_price">
+                                                    бесплатно
+                                                </div>
+                                            </div>
+                                            <label class="input_pvz_label" style="display: none;">
+                                                <span class="input_pvz__value">ПВЗ СДЭК - Москва, ул. Такая-то, д.
+                                                    5</span>
+
+                                            </label>
+                                            <input type="text" readonly class="hidden_input" name="pvz_adress"
+                                                value="ПВЗ СДЭК - Москва, ул. Такая-то, д. 5">
+                                            <div class="err-msg">Выберите ПВЗ</div>
+                                        </div>
+                                        <div class="order_page_contact__delivery_item">
+                                            <div class="order_page_contact__delivery_item__top">
+                                                <label class="label_radio">
+                                                    <input type="radio" class="input_radio" name="delivery">
+                                                    <div class="marker_radio"></div>
+                                                    <span>Курьером</span>
+
+
+                                                </label>
+                                                <div class="order_page_contact__delivery_item_price">
+                                                    500 руб.
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="order_page_contact_item">
+
+                                <h3 class="order_page_contact_item__title">
+                                    Адрес доставки
+                                </h3>
+                                <div class="order_page_contact_item__content">
+                                    <div class="input_wrapper">
+                                        <input type="text" name="adress" required placeholder="Улица, дом, квартира">
+                                        <div class="err-msg">Введите адрес</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="order_page_contact_item">
+
+                                <h3 class="order_page_contact_item__title">
+                                    Получатель
+                                </h3>
+                                <div class="order_page_contact_item__content">
+                                    <div class="input_wrapper">
+                                        <input type="text" name="name" required placeholder="ФИО">
+                                        <div class="err-msg">Введите ФИО</div>
+                                    </div>
+                                    <div class="input_wrapper">
+                                        <input type="text" name="phone" class="phone-input" required
+                                            placeholder="+7 908 678 32 33">
+                                        <div class="err-msg">Введите номер телефона</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_page_contact_item">
+
+                                <h3 class="order_page_contact_item__title">
+                                    Ваши данные
+                                </h3>
+                                <div class="order_page_contact_item__content">
+                                    <label class="check-label check-label_box_cart">
+                                        <input type="checkbox" name="contact_dubble">
+                                        <div class="marker-checkbox"></div>
+                                        <div>Совпадают с получателем</div>
+                                    </label>
+                                    <div class="input_wrapper">
+                                        <input type="text" name="name" required placeholder="ФИО">
+                                        <div class="err-msg">Введите ФИО</div>
+                                    </div>
+                                    <div class="input_wrapper">
+                                        <input type="email" name="email" required placeholder="Электронная почта">
+                                        <div class="err-msg">Введите почту</div>
+                                    </div>
+                                    <div class="input_wrapper">
+                                        <input type="text" name="phone" class="phone-input" required
+                                            placeholder="+7 908 678 32 33">
+                                        <div class="err-msg">Введите номер телефона</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order_page_contact_item">
+
+                                <h3 class="order_page_contact_item__title">
+                                    Способ оплаты
+                                </h3>
+                                <div class="order_page_contact_item__content">
+                                    <div class="order_page_contact__pay">
+                                        <div class="order_page_contact__pay_item">
+
+                                            <label class="label_radio">
+                                                <input type="radio" class="input_radio" name="pay" checked>
+                                                <div class="marker_radio"></div>
+                                                <span>СПБ</span>
+                                                <div class="order_page_contact__pay_item_img">
+                                                    <img src="./images/pay/spb.svg" alt="spb">
+                                                </div>
+                                            </label>
+
+
+                                        </div>
+                                        <div class="order_page_contact__pay_item">
+
+                                            <label class="label_radio">
+                                                <input type="radio" class="input_radio" name="pay">
+                                                <div class="marker_radio"></div>
+                                                <span>Оплата картой</span>
+                                                <div class="order_page_contact__pay_item_img">
+                                                    <img src="./images/pay/card.svg" alt="card">
+                                                </div>
+                                            </label>
+
+
+                                        </div>
+                                        <div class="order_page_contact__pay_item">
+
+                                            <label class="label_radio">
+                                                <input type="radio" class="input_radio" name="pay">
+                                                <div class="marker_radio"></div>
+                                                <span>Яндекс Пей</span>
+                                                <div class="order_page_contact__pay_item_img">
+                                                    <img src="./images/pay/yaPay.svg" alt="yandex pay">
+                                                </div>
+                                            </label>
+
+
+                                        </div>
+                                        <div class="order_page_contact__pay_item">
+
+                                            <label class="label_radio">
+                                                <input type="radio" class="input_radio" name="pay">
+                                                <div class="marker_radio"></div>
+                                                <span>Сплит</span>
+                                                <div class="order_page_contact__pay_item_img">
+                                                    <img src="./images/pay/split.svg" alt="split">
+                                                </div>
+                                            </label>
+
+
+                                        </div>
+                                        <div class="order_page_contact__pay_item">
+
+                                            <label class="label_radio">
+                                                <input type="radio" class="input_radio" name="pay">
+                                                <div class="marker_radio"></div>
+                                                <span>Оплата по счету для юр.лиц</span>
+                                                <div class="order_page_contact__pay_item_img">
+                                                    <img src="./images/pay/chet.svg" alt="счет">
+                                                </div>
+                                            </label>
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="order_page_bottom">
+                                <button type="submit" class="btn btn-primary">Оплатить заказ</button>
+                                <div class="input_check-wrapper">
+                                    <label class="check-label">
+                                        <input type="checkbox" required="">
+                                        <div class="marker-checkbox"></div>
+                                        <span>
+                                            Я принимаю условия <a href="#">Политики конфиденциальности</a>
+                                        </span>
+                                    </label>
+                                    <label class="check-label">
+                                        <input type="checkbox">
+                                        <div class="marker-checkbox"></div>
+                                        <span>
+                                            Я согласен(на) на получение рекламной рассылки
+                                        </span>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="order_page__grid_right">
+                            <h2>
+                                Сумма заказа
+                            </h2>
+                            <div class="modal_cart__promo ">
+                                <div class="promo_input_wrapper">
+                                    <input type="text" name="promo" placeholder="Промокод" value="" class="promo-input">
+                                    <span class="err-msg">Такого кода не существует</span>
+                                    <button type="button" class="btn btn-primary btn_promo"></button>
+                                </div>
+                                <div class="modal_cart__promo_ok">
+                                    <span>
+                                        Промокод применен
+                                    </span>
+                                    <button type="button" class="btn promo_del">Удалить</button>
+                                </div>
+                            </div>
+                            <div class="form_order">
+                                <div class="form_order__top">
+
+                                    <div class="order_desc">
+                                        <div class="order_desc__item">
+                                            <span class="order_desc__item_title">
+                                                Стоимость
+                                            </span>
+                                            <span class="order_desc__item_count">
+                                                10 500₽
+                                            </span>
+                                        </div>
+                                        <div class="order_desc__item">
+                                            <span class="order_desc__item_title">
+                                                Скидка
+                                            </span>
+                                            <span class="order_desc__item_count">
+                                                -2000₽
+                                            </span>
+                                        </div>
+                                        <div class="order_desc__item order_desc__item_promo">
+                                            <span class="order_desc__item_title">
+                                                Промокод
+                                            </span>
+                                            <span class="order_desc__item_count">
+                                                -1000₽
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form_order__bottom">
+                                    <div class="form_order__price">
+                                        Итого
+                                        <span>
+                                            10 500₽
+                                        </span>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Оплатить заказ</button>
+                                    <div class="input_check-wrapper">
+                                        <label class="check-label">
+                                            <input type="checkbox" required="">
+                                            <div class="marker-checkbox"></div>
+                                            <span>
+                                                Я принимаю условия <a href="#">Политики конфиденциальности</a>
+                                            </span>
+                                        </label>
+                                        <label class="check-label">
+                                            <input type="checkbox">
+                                            <div class="marker-checkbox"></div>
+                                            <span>
+                                                Я согласен(на) на получение рекламной рассылки
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+   
+
+
+
+
+
+
+
+    <div class="modal-overlay scrollbar-ios " data-modal="delivery_pvz">
+        <div class="modal_content_big">
+            <div id="map" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="modal_content_right">
+            <svg class="modal-close">
+                <use href="./images/sprite.svg#close"></use>
+            </svg>
+            <div class="modal__top">
+                <h2>
+                    Пункт выдачи
+                </h2>
+
+            </div>
+            <div class="pvz_location__content">
+                <div class="city_search_wrapper">
+                    <input type="search" placeholder="Введите адрес" class="city_search_input">
+                    <button type="button" class="search_clear" style="display: none;"></button>
+                </div>
+              
+            </div>
+            <div class="modal_content_mobile">
+                <div id="map_mobile" style="width: 100%; height: 100%;"></div>
+            </div>
+            <div class="pvz_location__container">
+                <!-- Список ПВЗ генерируется динамически -->
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-overlay scrollbar-ios " data-modal="city_order">
+
+        <div class="noise-overlay"></div>
+        <div class="modal_content_right">
+            <svg class="modal-close">
+                <use href="./images/sprite.svg#close"></use>
+            </svg>
+            <div class="modal__top">
+                <h2>
+                    Изменить город
+                </h2>
+
+            </div>
+            <div class="city_location__content">
+                <div class="city_search_wrapper">
+                    <input type="search" placeholder="Введите город" class="city_search_input">
+                    <button type="button" class="search_clear" style="display: none;"></button>
+                </div>
+                <div class="city_location__container">
+                    <button type="button" class="btn btn_location">Определить местоположение</button>
+                    <div class="city_location__items">
+                        <div class="city_location__no-results" style="display: none;">
+                            Нет города в списке 
+                        </div>
+                        <div class="city_location__item is-active" data-value="Москва">
+                            Москва
+                        </div>
+                        <div class="city_location__item" data-value="Санкт-Петербург">
+                            Санкт-Петербург
+                        </div>
+                        <div class="city_location__item" data-value="Ростов-на-Дону">
+                            Ростов-на-Дону
+                        </div>
+                        <div class="city_location__item" data-value="Екатеренбург">
+                            Екатеренбург
+                        </div>
+                        <div class="city_location__item" data-value="Воронеж">
+                            Воронеж
+                        </div>
+                        <div class="city_location__item" data-value="Самара">
+                            Самара
+                        </div>
+                        <div class="city_location__item" data-value="Сочи">
+                            Сочи
+                        </div>
+                        <div class="city_location__item" data-value="Екатеренбург">
+                            Екатеренбург
+                        </div>
+                        <div class="city_location__item" data-value="Санкт-Петербург">
+                            Санкт-Петербург
+                        </div>
+                        <div class="city_location__item" data-value="Воронеж">
+                            Воронеж
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js" id="jquery-js-js"></script>
+    <script src="./scripts/utils.js"></script>
+    <script src="./scripts/intlTelInput.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>

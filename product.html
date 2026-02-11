@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/intlTelInput.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <svg class="noise-filter">
+        <filter id="noise" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="1" stitchTiles="stitch" result="noise" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 
+                                             0 0 0 0 0 
+                                             0 0 0 0 0 
+                                             0 0 0 1 0" />
+        </filter>
+    </svg>
+    <header class="header">
+        <div class="header-container container">
+
+            <nav class="nav header_nav">
+                <a href="#" class="nav-item">
+                    О нас
+                </a>
+                <a href="#" class="nav-item">
+                    Качество
+                </a>
+                <a href="#" class="nav-item">
+                    Коллекция
+                </a>
+                <a href="#" class="nav-item">
+                    Вопросы
+                </a>
+            </nav>
+
+
+            <a href="#" class="logo_wrapper">
+                <svg class="logo_icon_snow" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="./images/sprite.svg#icon-logo-snow"></use>
+                </svg>
+                <svg class="logo_icon" width="235" height="36" viewBox="0 0 235 36">
+                    <use href="./images/sprite.svg#logo-icon"></use>
+                </svg>
+                <svg class="logo_icon_snow" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="./images/sprite.svg#icon-logo-snow"></use>
+                </svg>
+            </a>
+            <div class="header_btn_container">
+                <a href="#" class="header_btn header_btn_like"></a>
+                <a href="#" class="header_btn header_btn_cart" data-btn="cart">
+                    <div class="header_btn__count">1</div>
+                </a>
+
+            </div>
+
+
+        </div>
+    </header>
+    <div class="main_footer_fix">
+        <div class=" main_footer_fix__container">
+            <div class="main_footer_item hamburger" data-btn="menu">
+                <svg class="icon_hamburger" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="./images/sprite.svg#hamburger"></use>
+                </svg>
+            </div>
+            <a href="#" class="main_footer_item header_btn header_btn_like"></a>
+            <a href="#" class="main_footer_item header_btn header_btn_cart">
+                <div class="header_btn__count">10</div>
+            </a>
+            <a href="#" class="main_footer_item header_btn header_btn_matr"></a>
+
+        </div>
+    </div>
+    <main class="main">
+
+        <section class="product_page">
+            <div class="container product_page_container">
+                <nav class="breadcrumbs">
+                    <a href="/">Главная</a>
+                    <a href="/">Каталог</a>
+                    <a href="#">Лунная тень</a>
+                </nav>
+                <div class="product_page_content">
+                    <div class="product_page_img_wrapper">
+                        <div class="product_page_img swiper" data-img-wrapper="mini-red">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/products/1.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="video_wrapper">
+                                        <video src="./video/video.mp4" playsinline
+                                            poster="./images/products/1.png"></video>
+                                        <div class="video_btn"></div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="./images/products/1.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="./images/products/1.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="./images/products/1.png" alt="">
+                                </div>
+
+                            </div>
+                            <div class="product_page_img__pagination"></div>
+                            <div class="product_page_img__nav product_page_img__nav_prev"></div>
+                            <div class="product_page_img__nav product_page_img__nav_next"></div>
+                        </div>
+                        <div class="product_page_img swiper" data-img-wrapper="mini-black" style="display: none;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/products/2.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="video_wrapper">
+                                        <video src="./video/video.mp4" playsinline
+                                            poster="./images/products/2.png"></video>
+                                        <div class="video_btn"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product_page_img__pagination"></div>
+                            <div class="product_page_img__nav product_page_img__nav_prev"></div>
+                            <div class="product_page_img__nav product_page_img__nav_next"></div>
+                        </div>
+                        <div class="product_page_img swiper" data-img-wrapper="mini-bezh" style="display: none;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/products/4.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="video_wrapper">
+                                        <video src="./video/video.mp4" playsinline
+                                            poster="./images/products/4.png"></video>
+                                        <div class="video_btn"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product_page_img__pagination"></div>
+                            <div class="product_page_img__nav product_page_img__nav_prev"></div>
+                            <div class="product_page_img__nav product_page_img__nav_next"></div>
+                        </div>
+                        <div class="product_page_img swiper" data-img-wrapper="mini-color" style="display: none;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/products/5.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="video_wrapper">
+                                        <video src="./video/video.mp4" playsinline
+                                            poster="./images/products/5.png"></video>
+                                        <div class="video_btn"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product_page_img__pagination"></div>
+                            <div class="product_page_img__nav product_page_img__nav_prev"></div>
+                            <div class="product_page_img__nav product_page_img__nav_next"></div>
+                        </div>
+                        <div class="product_page_img swiper" data-img-wrapper="mini3-red" style="display: none;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/products/2.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="video_wrapper">
+                                        <video src="./video/video.mp4" playsinline
+                                            poster="./images/products/1.png"></video>
+                                        <div class="video_btn"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product_page_img__pagination"></div>
+                            <div class="product_page_img__nav product_page_img__nav_prev"></div>
+                            <div class="product_page_img__nav product_page_img__nav_next"></div>
+                        </div>
+                        <div class="product_page_img swiper" data-img-wrapper="mini3-black" style="display: none;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/products/2.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="video_wrapper">
+                                        <video src="./video/video.mp4" playsinline
+                                            poster="./images/products/4.png"></video>
+                                        <div class="video_btn"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product_page_img__pagination"></div>
+                            <div class="product_page_img__nav product_page_img__nav_prev"></div>
+                            <div class="product_page_img__nav product_page_img__nav_next"></div>
+                        </div>
+                        <div class="product_page_img swiper" data-img-wrapper="mini3-bezh" style="display: none;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/products/3.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="video_wrapper">
+                                        <video src="./video/video.mp4" playsinline
+                                            poster="./images/products/1.png"></video>
+                                        <div class="video_btn"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product_page_img__pagination"></div>
+                            <div class="product_page_img__nav product_page_img__nav_prev"></div>
+                            <div class="product_page_img__nav product_page_img__nav_next"></div>
+                        </div>
+                        <div class="product_page_img swiper" data-img-wrapper="mini3-color" style="display: none;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="./images/products/5.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="video_wrapper">
+                                        <video src="./video/video.mp4" playsinline
+                                            poster="./images/products/5.png"></video>
+                                        <div class="video_btn"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="product_page_img__pagination"></div>
+                            <div class="product_page_img__nav product_page_img__nav_prev"></div>
+                            <div class="product_page_img__nav product_page_img__nav_next"></div>
+                        </div>
+                    </div>
+
+                    <div class="product_page_info">
+                        <div class="product_page_info__content">
+                            <div class="product_page_info__top">
+                                <div class="product_page_info__title">
+                                    <h1 class="section_title">
+                                        Цветок света
+                                    </h1>
+                                    <div class="product_share_btns">
+                                        <div class="product_page__share"></div>
+                                        <div class="product_card__like">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z"
+                                                    stroke="#393939" stroke-width="2" stroke-linejoin="round" />
+                                            </svg>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product_page_info__price">
+                                    <div class="product_page_price">
+                                        <span>
+                                            10 500₽
+                                        </span>
+                                    </div>
+                                    <div class="product_page__split_wrapper" data-btn="split">
+                                        <span>от 679 ₽ x 8 платежей</span>
+                                        <div class="split_link">
+                                            <span>Подробнее</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_page_info__middle">
+                                <div class="product_page_option__container">
+                                    <div class="product_page_option">
+                                        <div class="product_page_option_title">
+                                            Модель станции:
+                                        </div>
+                                        <div class="product_page_option__items">
+                                            <div class="tab-item  is-active" data-tab-station="mini">
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                                <span>Мини</span>
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tab-item  " data-tab-station="mini3">
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                                <span>Мини 3</span>
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tab-item  " data-tab-station="mini3pro">
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                                <span>Мини 3 Про</span>
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tab-item  " data-tab-station="lite">
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                                <span>Лайт</span>
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="product_page_option">
+                                        <div class="product_page_option_title">
+                                            Цвет:
+                                        </div>
+                                        <div class="product_page_option__items">
+                                            <div class="tab-item  is-active" data-tab-color="red">
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+
+                                                <span>Красный</span>
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tab-item  " data-tab-color="black">
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                                <span>Черный</span>
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tab-item  " data-tab-color="bezh">
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                                <span>Бежевый</span>
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                            </div>
+                                            <div class="tab-item  " data-tab-color="color">
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                                <span>Цветная</span>
+                                                <svg class="tab-icon">
+                                                    <use href="../images/sprite.svg#subtract"></use>
+                                                </svg>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <label class="check-label check-label_box_cart">
+                                        <input type="checkbox" required="">
+                                        <div class="marker-checkbox"></div>
+                                        <div class="check-label_box_cart__text">
+                                            Подарочная упаковка <span>+9 999</span>
+                                            <div class="tooltip">
+                                                <div class="tooltip_icon"></div>
+                                                <div class="tooltip_hidden">
+                                                    <div class="tooltip_hidden_content">
+                                                        Товар придет в стильной подарочной коробке. Вариант коробки
+                                                        можно
+                                                        посмотреть
+                                                        по <a href="#">ссылке</a>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="product_page_order">
+                                    <div class="product_page_order__hint" data-aviability="">
+
+                                        <span>В наличии 20 шт</span>
+                                    </div>
+                                    <div class="product_page_order__hint" data-aviability="false">
+
+                                        <span>Под заказ. Срок изготовления 4-7 дней</span>
+                                    </div>
+                                    <button type="button" class="btn btn-primary">Заказать</button>
+                                </div>
+                                <div class="product_page_faq-container">
+                                    <div class="faq-item">
+                                        <div class="faq-item_top">
+                                            <p>
+                                                Описание
+                                            </p>
+                                            <svg class="faq-arrow">
+                                                <use href="./images/sprite.svg#arrow"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="faq-item_hidden">
+                                            <p>
+                                                Под высоким венцом сияет резной цветок, что распускается в сердце
+                                                каждого,
+                                                кто верит. Чёткий орнамент ведёт путника, косы хранят тепло семьи. Она —
+                                                тихий талисман нового начала и надёжного пути домой.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="faq-item">
+                                        <div class="faq-item_top">
+                                            <p>
+                                                Характеристики товара
+                                            </p>
+                                            <svg class="faq-arrow">
+                                                <use href="./images/sprite.svg#arrow"></use>
+                                            </svg>
+                                        </div>
+                                        <div class="faq-item_hidden">
+                                            <ol>
+                                                <li>
+                                                    Гарантия
+                                                </li>
+                                                <li>
+                                                    2 года
+                                                </li>
+                                            </ol>
+                                            <ol>
+                                                <li>
+                                                    Размеры
+                                                </li>
+                                                <li>
+                                                    11х22х33
+                                                </li>
+                                            </ol>
+                                            <ol>
+                                                <li>
+                                                    Вес
+                                                </li>
+                                                <li>
+                                                    2 кг
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="product_page_info__rich">
+                                <span>
+                                    О товаре
+                                </span>
+                                <div class="product_page_info__rich_content">
+                                    <div class="rich_item">
+                                        <img src="./images/rich/1.png" alt="">
+
+                                        <button type="button" class="btn btn-primary" data-btn="rich"
+                                            data-img='["./images/rich/1.png", "./images/rich/2.png", "./images/rich/2.png"]'>Подробнее</button>
+
+                                    </div>
+                                    <div class="rich_item">
+                                        <img src="./images/rich/2.png" alt="">
+
+                                        <button type="button" class="btn btn-primary" data-btn="rich"
+                                            data-img='["./images/rich/2.png", "./images/rich/1.png", "./images/rich/2.png"]'>Подробнее</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="more_product">
+            <div class="container">
+                <div class="swiper swiper_product">
+                    <div class="swiper_product__top">
+                        <h2>
+                            Вам может понравиться
+                        </h2>
+                        <div class="swiper_product__nav_container">
+                            <div class="swiper_product__nav swiper_product__nav_prev"></div>
+                            <div class="swiper_product__nav swiper_product__nav_next"></div>
+                        </div>
+                    </div>
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="product_card">
+                                <div class="product_card__like">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z"
+                                            stroke="#393939" stroke-width="2" stroke-linejoin="round"></path>
+                                    </svg>
+
+                                </div>
+                                <div
+                                    class="product_card_img swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                                    <div class="swiper-wrapper" id="swiper-wrapper-9d02256689c94532" aria-live="polite"
+                                        style="cursor: grab;">
+                                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4"
+                                            data-swiper-slide-index="0" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4"
+                                            data-swiper-slide-index="1" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="3 / 4"
+                                            data-swiper-slide-index="2" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="4 / 4"
+                                            data-swiper-slide-index="3" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="product_img_pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active"
+                                            tabindex="0" role="button" aria-label="Go to slide 1"
+                                            aria-current="true"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 2"></span><span
+                                            class="swiper-pagination-bullet" tabindex="0" role="button"
+                                            aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 4"></span>
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_prev" tabindex="0" role="button"
+                                        aria-label="Previous slide" aria-controls="swiper-wrapper-9d02256689c94532">
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_next" tabindex="0" role="button"
+                                        aria-label="Next slide" aria-controls="swiper-wrapper-9d02256689c94532"></div>
+
+                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                </div>
+                                <div class="product_card__info">
+                                    <div class="product_card__desc">
+                                        <h4 class="product_card__title">
+                                            Цветок света
+                                        </h4>
+                                        <p class="product_card__price">
+                                            от <span>10 500₽</span>
+                                        </p>
+                                    </div>
+                                    <a href="#" class="btn btn-primary">Заказать</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="product_card">
+                                <div class="product_card__like">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z"
+                                            stroke="#393939" stroke-width="2" stroke-linejoin="round"></path>
+                                    </svg>
+
+                                </div>
+                                <div
+                                    class="product_card_img swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                                    <div class="swiper-wrapper" id="swiper-wrapper-9d02256689c94532" aria-live="polite"
+                                        style="cursor: grab;">
+                                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4"
+                                            data-swiper-slide-index="0" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4"
+                                            data-swiper-slide-index="1" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="3 / 4"
+                                            data-swiper-slide-index="2" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="4 / 4"
+                                            data-swiper-slide-index="3" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="product_img_pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active"
+                                            tabindex="0" role="button" aria-label="Go to slide 1"
+                                            aria-current="true"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 2"></span><span
+                                            class="swiper-pagination-bullet" tabindex="0" role="button"
+                                            aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 4"></span>
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_prev" tabindex="0" role="button"
+                                        aria-label="Previous slide" aria-controls="swiper-wrapper-9d02256689c94532">
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_next" tabindex="0" role="button"
+                                        aria-label="Next slide" aria-controls="swiper-wrapper-9d02256689c94532"></div>
+
+                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                </div>
+                                <div class="product_card__info">
+                                    <div class="product_card__desc">
+                                        <h4 class="product_card__title">
+                                            Цветок света
+                                        </h4>
+                                        <p class="product_card__price">
+                                            от <span>10 500₽</span>
+                                        </p>
+                                    </div>
+                                    <a href="#" class="btn btn-primary">Заказать</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="product_card">
+                                <div class="product_card__like">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z"
+                                            stroke="#393939" stroke-width="2" stroke-linejoin="round"></path>
+                                    </svg>
+
+                                </div>
+                                <div
+                                    class="product_card_img swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                                    <div class="swiper-wrapper" id="swiper-wrapper-9d02256689c94532" aria-live="polite"
+                                        style="cursor: grab;">
+                                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4"
+                                            data-swiper-slide-index="0" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4"
+                                            data-swiper-slide-index="1" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="3 / 4"
+                                            data-swiper-slide-index="2" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="4 / 4"
+                                            data-swiper-slide-index="3" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="product_img_pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active"
+                                            tabindex="0" role="button" aria-label="Go to slide 1"
+                                            aria-current="true"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 2"></span><span
+                                            class="swiper-pagination-bullet" tabindex="0" role="button"
+                                            aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 4"></span>
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_prev" tabindex="0" role="button"
+                                        aria-label="Previous slide" aria-controls="swiper-wrapper-9d02256689c94532">
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_next" tabindex="0" role="button"
+                                        aria-label="Next slide" aria-controls="swiper-wrapper-9d02256689c94532"></div>
+
+                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                </div>
+                                <div class="product_card__info">
+                                    <div class="product_card__desc">
+                                        <h4 class="product_card__title">
+                                            Цветок света
+                                        </h4>
+                                        <p class="product_card__price">
+                                            от <span>10 500₽</span>
+                                        </p>
+                                    </div>
+                                    <a href="#" class="btn btn-primary">Заказать</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="product_card">
+                                <div class="product_card__like">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z"
+                                            stroke="#393939" stroke-width="2" stroke-linejoin="round"></path>
+                                    </svg>
+
+                                </div>
+                                <div
+                                    class="product_card_img swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                                    <div class="swiper-wrapper" id="swiper-wrapper-9d02256689c94532" aria-live="polite"
+                                        style="cursor: grab;">
+                                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4"
+                                            data-swiper-slide-index="0" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4"
+                                            data-swiper-slide-index="1" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="3 / 4"
+                                            data-swiper-slide-index="2" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="4 / 4"
+                                            data-swiper-slide-index="3" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="product_img_pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active"
+                                            tabindex="0" role="button" aria-label="Go to slide 1"
+                                            aria-current="true"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 2"></span><span
+                                            class="swiper-pagination-bullet" tabindex="0" role="button"
+                                            aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 4"></span>
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_prev" tabindex="0" role="button"
+                                        aria-label="Previous slide" aria-controls="swiper-wrapper-9d02256689c94532">
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_next" tabindex="0" role="button"
+                                        aria-label="Next slide" aria-controls="swiper-wrapper-9d02256689c94532"></div>
+
+                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                </div>
+                                <div class="product_card__info">
+                                    <div class="product_card__desc">
+                                        <h4 class="product_card__title">
+                                            Цветок света
+                                        </h4>
+                                        <p class="product_card__price">
+                                            от <span>10 500₽</span>
+                                        </p>
+                                    </div>
+                                    <a href="#" class="btn btn-primary">Заказать</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="product_card">
+                                <div class="product_card__like">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z"
+                                            stroke="#393939" stroke-width="2" stroke-linejoin="round"></path>
+                                    </svg>
+
+                                </div>
+                                <div
+                                    class="product_card_img swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                                    <div class="swiper-wrapper" id="swiper-wrapper-9d02256689c94532" aria-live="polite"
+                                        style="cursor: grab;">
+                                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4"
+                                            data-swiper-slide-index="0" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4"
+                                            data-swiper-slide-index="1" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="3 / 4"
+                                            data-swiper-slide-index="2" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+                                        <div class="swiper-slide" role="group" aria-label="4 / 4"
+                                            data-swiper-slide-index="3" style="width: 509px;">
+                                            <img src="./images/products/1.png" alt="1">
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="product_img_pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active"
+                                            tabindex="0" role="button" aria-label="Go to slide 1"
+                                            aria-current="true"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 2"></span><span
+                                            class="swiper-pagination-bullet" tabindex="0" role="button"
+                                            aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet"
+                                            tabindex="0" role="button" aria-label="Go to slide 4"></span>
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_prev" tabindex="0" role="button"
+                                        aria-label="Previous slide" aria-controls="swiper-wrapper-9d02256689c94532">
+                                    </div>
+                                    <div class="product_img_nav product_img_nav_next" tabindex="0" role="button"
+                                        aria-label="Next slide" aria-controls="swiper-wrapper-9d02256689c94532"></div>
+
+                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                                </div>
+                                <div class="product_card__info">
+                                    <div class="product_card__desc">
+                                        <h4 class="product_card__title">
+                                            Цветок света
+                                        </h4>
+                                        <p class="product_card__price">
+                                            от <span>10 500₽</span>
+                                        </p>
+                                    </div>
+                                    <a href="#" class="btn btn-primary">Заказать</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section class="red_section layer-two">
+            <div class="noise-overlay"></div>
+            <div class="section-form-container container">
+                <div class="block-info">
+                    <h2>
+                        Будьте первыми, кто получит свою капсулу
+                    </h2>
+                    <p>
+                        Сейчас мы запускаем ограниченную партию. Выберите понравившийся стиль и оставьте заявку. Как
+                        только будет готова — мы сообщим.
+                    </p>
+                </div>
+                <form class="form">
+                    <div class="form-wrapper">
+                        <div class="input_container">
+                            <input type="name" placeholder="Имя" required>
+                            <input type="email" placeholder="Электронная почта" required>
+                            <input type="text" class="phone-input" name="phone" required="" autocomplete="off">
+                        </div>
+                        <button class="btn btn-primary">Оформить предзаказ</button>
+                        <div class="input_check-wrapper">
+                            <label class="check-label">
+                                <input type="checkbox" required>
+                                <div class="marker-checkbox"></div>
+                                <span>
+                                    Я принимаю условия <a href="#">Политики конфиденциальности</a>
+                                </span>
+                            </label>
+                            <label class="check-label">
+                                <input type="checkbox">
+                                <div class="marker-checkbox"></div>
+                                <span>
+                                    Я согласен(на) на получение рекламной рассылки
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="succes_form-msg" style="display: none;">
+                        <h2>
+                            Заявка отправлена
+                        </h2>
+                        <p>Менеджер свяжется в ближайшее время</p>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+        <section class="gift-section">
+            <div class="gift__container">
+                <div class="container gift-content">
+                    <p>
+                        Не знаете какую подарить?
+                    </p>
+                    <h2>
+                        Подарите сертификат
+                    </h2>
+                    <button class="btn btn-primary" data-btn="giftOrder">Оформить сертификат</button>
+                    <img src="./images/gift-card.png" alt="сертификат" class="gift-card-img gift-card-img_left">
+                    <img src="./images/gift-card.png" alt="сертификат" class="gift-card-img gift-card-img_right">
+                </div>
+            </div>
+        </section>
+
+        <section class="section_social">
+            <div class="social-container container">
+                <h2>Не готовы выбрать сейчас? Подпишитесь — мы расскажем первыми о запуске.</h2>
+                <div class="social_links">
+                    <a href="#">
+                        <svg class="social-icon">
+                            <use href="./images/sprite.svg#vk"></use>
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg class="social-icon">
+                            <use href="./images/sprite.svg#tg"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="noise-overlay"></div>
+        <div class="footer-container container">
+            <a href="#" class="logo_wrapper">
+                <svg class="logo_icon_snow" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="./images/sprite.svg#icon-logo-snow"></use>
+                </svg>
+                <svg class="logo_icon" width="235" height="36" viewBox="0 0 235 36">
+                    <use href="./images/sprite.svg#logo-icon"></use>
+                </svg>
+                <svg class="logo_icon_snow" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="./images/sprite.svg#icon-logo-snow"></use>
+                </svg>
+            </a>
+            <div class="footer_content">
+                <nav class="nav ">
+                    <a href="#" class="nav-item">
+                        О нас
+                    </a>
+                    <a href="#" class="nav-item">
+                        Качество
+                    </a>
+                    <a href="#" class="nav-item">
+                        Коллекция
+                    </a>
+                    <a href="#" class="nav-item">
+                        Вопросы
+                    </a>
+                </nav>
+                <div class="about-company">
+                    <span>
+                        ИП Дармограй Владислав Ростиславович
+                    </span>
+                    <span>
+                        ИНН 930700042271
+                    </span>
+                    <span>
+                        ОГРНИП 323930100300084
+                    </span>
+                </div>
+            </div>
+            <div class="footer_bottom">
+                <div class="footer_bottom-top">
+                    <span>
+                        2025. Все права защищены
+                    </span>
+
+                    <div class="politick_link">
+                        <a href="#">
+                            Политика конфиденциальности
+                        </a>
+                        <a href="#">
+                            Договор оферты
+                        </a>
+                    </div>
+                </div>
+                <span class="footer_text">
+                    сайта, вы соглашаетесь с условиями использования. В ином случае вам необходимо покинуть сайт. Сайт
+                    использует файлы cookies для взаимодействия с вами. Вы можете согласиться на использование cookies
+                    или заблокировать их использование, изменив настройки вашего интернет-браузера, следуя инструкции.
+                </span>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal-overlay " data-modal="giftOrder">
+        <div class="modal_popup">
+            <svg class="modal-close">
+                <use href="./images/sprite.svg#close"></use>
+            </svg>
+            <div class="order-gift-container">
+                <h3 class="order-gift-title">
+                    Заказать сертификат
+                </h3>
+                <form class="form">
+                    <div class="form-wrapper">
+                        <div class="input_container">
+                            <input type="name" placeholder="Имя" required>
+                            <input type="email" placeholder="Электронная почта" required>
+                            <input type="text" class="phone-input" name="phone" required autocomplete="off">
+                            <input type="text" class="gift-sum" name="sum-gift" readonly
+                                placeholder="Сумма сертификата">
+                            <div class="gift-sum-items">
+                                <label class="gift-sum-item">
+                                    <input type="radio" name="gift-sum-radio" class="gift-sum-radio" required>
+                                    <div class="tab-item  " data-tab-collection="Вежливые люди">
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+                                        <span>3 000 ₽</span>
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+
+                                    </div>
+                                </label>
+                                <label class="gift-sum-item">
+                                    <input type="radio" name="gift-sum-radio" class="gift-sum-radio">
+                                    <div class="tab-item " data-tab-collection="Вежливые люди">
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+                                        <span>5 000 ₽</span>
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+
+                                    </div>
+                                </label>
+                                <label class="gift-sum-item">
+                                    <input type="radio" name="gift-sum-radio" class="gift-sum-radio">
+                                    <div class="tab-item  " data-tab-collection="Вежливые люди">
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+                                        <span>10 000 ₽</span>
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+
+                                    </div>
+                                </label>
+                                <label class="gift-sum-item">
+                                    <input type="radio" name="gift-sum-radio" class="gift-sum-radio">
+                                    <div class="tab-item  " data-tab-collection="Вежливые люди">
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+                                        <span>15 000 ₽</span>
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+
+                                    </div>
+                                </label>
+                                <label class="gift-sum-item">
+                                    <input type="radio" name="gift-sum-radio" class="gift-sum-radio">
+                                    <div class="tab-item " data-tab-collection="Вежливые люди">
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+                                        <span>20 000 ₽</span>
+                                        <svg class="tab-icon">
+                                            <use href="./images/sprite.svg#subtract"></use>
+                                        </svg>
+
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Отправить</button>
+                        <div class="input_check-wrapper">
+                            <label class="check-label">
+                                <input type="checkbox" required>
+                                <div class="marker-checkbox"></div>
+                                <span>
+                                    Я принимаю условия <a href="#">Политики конфиденциальности</a>
+                                </span>
+                            </label>
+                            <label class="check-label">
+                                <input type="checkbox">
+                                <div class="marker-checkbox"></div>
+                                <span>
+                                    Я согласен(на) на получение рекламной рассылки
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="succes_form-msg" style="display: none;">
+                        <h2>
+                            Заявка отправлена
+                        </h2>
+                        <p>Менеджер свяжется в ближайшее время</p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-overlay " data-modal="menu">
+        <div class="modal-menu">
+            <svg class="modal-close">
+                <use href="./images/sprite.svg#close"></use>
+            </svg>
+
+            <nav class="nav nav-menu">
+                <a href="#" class="nav-item">
+                    О нас
+                </a>
+                <a href="#" class="nav-item">
+                    Качество
+                </a>
+                <a href="#" class="nav-item">
+                    Коллекция
+                </a>
+                <a href="#" class="nav-item">
+                    Вопросы
+                </a>
+            </nav>
+
+            <div class="social_links">
+                <a href="#">
+                    <svg class="social-icon">
+                        <use href="./images/sprite.svg#vk"></use>
+                    </svg>
+                </a>
+                <a href="#">
+                    <svg class="social-icon">
+                        <use href="./images/sprite.svg#tg"></use>
+                    </svg>
+                </a>
+            </div>
+            <a href="#catalog" class="btn btn-primary">Предзаказ</a>
+
+
+        </div>
+    </div>
+    <div class="modal-overlay scrollbar-ios" data-modal="cart">
+
+        <div class="noise-overlay"></div>
+        <div class="modal_content_right">
+            <svg class="modal-close">
+                <use href="./images/sprite.svg#close"></use>
+            </svg>
+            <div class="modal__top">
+                <h2>
+                    Корзина
+                </h2>
+                <p>
+                    2 товара
+                </p>
+            </div>
+            <div class="modal_cart__content">
+                <div class="cart_product">
+                    <img src="./images/products/1.png" alt="vatr" class="cart_product__img">
+                    <div class="cart_product__info">
+                        <h4 class="cart_product__title">
+                            Лунная тень
+                        </h4>
+                        <div class="cart_product__info-order">
+                            <div class="cart_product_model">
+                                Модель станции: Мини
+                            </div>
+                            <label class="check-label check-label_box_cart">
+                                <input type="checkbox" required="">
+                                <div class="marker-checkbox"></div>
+                                <div class="check-label_box_cart__text">
+                                    Подарочная упаковка <span>+9 999</span>
+                                    <div class="tooltip">
+                                        <div class="tooltip_icon"></div>
+                                        <div class="tooltip_hidden">
+                                            <div class="tooltip_hidden_content">
+                                                Товар придет в стильной подарочной коробке. Вариант коробки можно
+                                                посмотреть
+                                                по <a href="#">ссылке</a>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="cart_product__price">
+                            <div class="cart_product__price_top">
+                                <span class="new_price">10 500₽</span>
+                                <span class="old_price">12 500₽</span>
+                            </div>
+                            <div class="cart_product__price_disc">
+                                Скидка 2000₽
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart_product_bottom">
+                        <div class="product_counter">
+                            <div class="product_counter__minus"></div>
+                            <input type="text" readonly class="product_counter__count" value="1">
+                            <div class="product_counter__plus"></div>
+
+                        </div>
+                        <div class="cart_product__btn">
+                            <div class="product_card__like">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z"
+                                        stroke="#393939" stroke-width="2" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="btn_trash"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart_product">
+                    <img src="./images/products/2.png" alt="vatr" class="cart_product__img">
+                    <div class="cart_product__info">
+                        <h4 class="cart_product__title">
+                            Княжна
+                        </h4>
+                        <div class="cart_product__info-order">
+                            <div class="cart_product_model">
+                                Модель станции: Мини
+                            </div>
+                            <label class="check-label check-label_box_cart">
+                                <input type="checkbox" required="">
+                                <div class="marker-checkbox"></div>
+                                <div class="check-label_box_cart__text">
+                                    Подарочная упаковка <span>+9 999</span>
+                                    <div class="tooltip">
+                                        <div class="tooltip_icon"></div>
+                                        <div class="tooltip_hidden">
+                                            <div class="tooltip_hidden_content">
+                                                Товар придет в стильной подарочной коробке. Вариант коробки можно
+                                                посмотреть
+                                                по <a href="#">ссылке</a>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="cart_product__price">
+                            <div class="cart_product__price_top">
+                                <span class="new_price">10 500₽</span>
+                                <span class="old_price">12 500₽</span>
+                            </div>
+                            <div class="cart_product__price_disc">
+                                Скидка 2000₽
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart_product_bottom">
+                        <div class="product_counter">
+                            <div class="product_counter__minus"></div>
+                            <input type="text" readonly class="product_counter__count" value="1">
+                            <div class="product_counter__plus"></div>
+
+                        </div>
+                        <div class="cart_product__btn">
+                            <div class="product_card__like">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M22 8.86222C22 10.4087 21.4062 11.8941 20.3458 12.9929C17.9049 15.523 15.5374 18.1613 13.0053 20.5997C12.4249 21.1505 11.5042 21.1304 10.9488 20.5547L3.65376 12.9929C1.44875 10.7072 1.44875 7.01723 3.65376 4.73157C5.88044 2.42345 9.50794 2.42345 11.7346 4.73157L11.9998 5.00642L12.2648 4.73173C13.3324 3.6245 14.7864 3 16.3053 3C17.8242 3 19.2781 3.62444 20.3458 4.73157C21.4063 5.83045 22 7.31577 22 8.86222Z"
+                                        stroke="#393939" stroke-width="2" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <div class="btn_trash"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal_forms">
+                <form class="modal_cart__promo ">
+                    <div class="promo_input_wrapper">
+                        <input type="text" name="promo" required placeholder="Промокод" value="" class="promo-input">
+                        <span class="err-msg">Такого кода не существует</span>
+                        <button class="btn btn-primary btn_promo"></button>
+                    </div>
+                    <div class="modal_cart__promo_ok">
+                        <span>
+                            Промокод применен
+                        </span>
+                        <button type="button" class="btn promo_del">Удалить</button>
+                    </div>
+                </form>
+                <form class="form_order">
+                    <div class="form_order__top">
+                        <h2>
+                            Сумма заказа
+                        </h2>
+                        <div class="order_desc">
+                            <div class="order_desc__item">
+                                <span class="order_desc__item_title">
+                                    Стоимость
+                                </span>
+                                <span class="order_desc__item_count">
+                                    10 500₽
+                                </span>
+                            </div>
+                            <div class="order_desc__item">
+                                <span class="order_desc__item_title">
+                                    Скидка
+                                </span>
+                                <span class="order_desc__item_count">
+                                    -2000₽
+                                </span>
+                            </div>
+                            <div class="order_desc__item order_desc__item_promo">
+                                <span class="order_desc__item_title">
+                                    Промокод
+                                </span>
+                                <span class="order_desc__item_count">
+                                    -1000₽
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_order__bottom">
+                        <div class="form_order__price">
+                            Итого
+                            <span>
+                                10 500₽
+                            </span>
+                        </div>
+                        <button class="btn btn-primary">Оформить заказ</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay " data-modal="split">
+        <div class="modal_popup">
+
+            <div class="split_modal_content">
+                <div class="split_modal_content_top">
+                    <h2 class="split_modal_title">Покупка частями</h2>
+                    <svg class="modal-close">
+                        <use href="./images/sprite.svg#close"></use>
+                    </svg>
+                </div>
+                <div class="split_modal__middle">
+                    <div class="split_modal__pays">
+                        <div class="split_modal__pays_item">
+                            <span>
+                                2 513 ₽
+                            </span>
+                            <span>
+                                Сегодня
+                            </span>
+                        </div>
+                        <div class="split_modal__pays__line"></div>
+                        <div class="split_modal__pays_item">
+                            <span>
+                                2 513 ₽
+                            </span>
+                            <span>
+                                Через 2 недели
+                            </span>
+                        </div>
+                        <div class="split_modal__pays__line"></div>
+                        <div class="split_modal__pays_item">
+                            <span>
+                                2 513 ₽
+                            </span>
+                            <span>
+                                Через 4 недели
+                            </span>
+                        </div>
+                        <div class="split_modal__pays__line"></div>
+                        <div class="split_modal__pays_item">
+                            <span>
+                                2 513 ₽
+                            </span>
+                            <span>
+                                Через 6 недель
+                            </span>
+                        </div>
+                    </div>
+                    <h2 class="split_modal_title">Все просто</h2>
+                    <div class="split_info_text">
+                        <span>
+                            Покупка уже ваша
+                        </span>
+                        <p>
+                            Выбирайте любые понравившиеся товары, сборка заказа начнётся сразу после оформления и оплаты
+                            первых 25% стоимости.
+                        </p>
+                    </div>
+                    <div class="split_info_text">
+                        <span>
+                            4 небольших платежа
+                        </span>
+                        <p>
+                            При оформлении заказа выбирайте любой сервис из списка, чтобы оплатить по частям. Сервис
+                            автоматически будет списывать по 1/4 от стоимости покупки каждые 2 недели.
+                        </p>
+                        <p>
+                            График платежей будет доступен в приложении сервиса.
+                        </p>
+                    </div>
+                    <div class="split_info_text">
+                        <span>
+                            Без переплат и скрытых условий
+                        </span>
+                        <p>
+                            Это не кредит и не рассрочка: вы заплатите ровно ту сумму, которая указана в корзине при
+                            оформлении заказа.
+                        </p>
+                        <p>
+                            При оплате «Долями» может взиматься сервисный сбор. Его сумму вы увидите на сайте партнёра
+                            во время оформления заказа.
+                        </p>
+                    </div>
+                    <div class="split_info_text">
+                        <span>
+                            Без анкет и ожидания
+                        </span>
+                        <p>
+                            Нужно просто ввести ФИО, дату рождения, номер телефона и данные банковской карты. А при
+                            оплате Сплитом достаточно перейти в Яндекс Пэй и выбрать привязанную карту.
+                        </p>
+                        <p>
+                            При отмене заказа деньги вернутся вам на карту.
+                        </p>
+                    </div>
+                    <h2 class="split_modal_title">Как оформить</h2>
+                    <ol>
+                        <li>Соберите корзину</li>
+                        <li>
+                            Выберите сервис для оплаты:
+                            <ul>
+                                <li>
+                                    Долями — от 1 000 ₽ до 70 000 ₽
+                                </li>
+                                <li>
+                                    Подели — от 1 000 ₽ до 40 000 ₽
+                                </li>
+                                <li>
+                                    Сплит — до 295 000 ₽
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Нажмите «Оплатить заказ»
+                        </li>
+                        <li>
+                            Спишем первый платёж и отправим вам заказ. Остальное — точно по графику
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" data-modal="rich">
+        <div class="modal_popup">
+
+            <div class="split_modal_content">
+                <div class="split_modal_content_top">
+                    <svg class="modal-close">
+                        <use href="./images/sprite.svg#close"></use>
+                    </svg>
+                </div>
+                <div class="rich_content scrollbar-ios">
+                    <!-- изображения подставляются из data-img кнопки -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js" id="jquery-js-js"></script>
+    <script src="./scripts/utils.js"></script>
+    <script src="./scripts/intlTelInput.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>
