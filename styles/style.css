@@ -1781,6 +1781,7 @@ input {
 
 .tooltip {
     width: fit-content;
+    height: 100%;
 }
 
 .tooltip_icon {
@@ -1796,8 +1797,8 @@ input {
 
 .tooltip_hidden {
     position: absolute;
-    top: 100%;
-    left: 100%;
+    top: calc(100% -20px);
+    left: calc(100% -20px);
     padding-top: 8px;
     display: none;
 
