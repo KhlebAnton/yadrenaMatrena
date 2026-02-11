@@ -1558,6 +1558,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (errMsg) {
                     errMsg.style.display = 'block';
                 }
+            } else if (input.type === 'checkbox') {
+                const checkWrapper = input.closest('.input_check-wrapper');
+                if (checkWrapper) {
+                    const errMsg = checkWrapper.querySelector('.err-msg');
+                    if (errMsg) errMsg.style.display = 'block';
+                }
             }
         }
 
@@ -1570,6 +1576,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 const errMsg = inputWrapper.querySelector('.err-msg');
                 if (errMsg) {
                     errMsg.style.display = 'none';
+                }
+            }
+            // сброс ошибки для чекбокса в .input_check-wrapper
+            if (input.type === 'checkbox') {
+                const checkWrapper = input.closest('.input_check-wrapper');
+                if (checkWrapper) {
+                    const errMsg = checkWrapper.querySelector('.err-msg');
+                    if (errMsg) errMsg.style.display = 'none';
                 }
             }
         }
@@ -1601,6 +1615,19 @@ document.addEventListener('DOMContentLoaded', function () {
             // Проверяем все обязательные поля формы
             const requiredInputs = orderForm.querySelectorAll('input[required]');
             requiredInputs.forEach(input => {
+                // Обязательный чекбокс: проверяем checked
+                if (input.type === 'checkbox') {
+                    const checkWrapper = input.closest('.input_check-wrapper');
+                    const wrapperVisible = !checkWrapper || window.getComputedStyle(checkWrapper).display !== 'none';
+                    if (wrapperVisible && !input.checked) {
+                        showFieldError(input);
+                        isValid = false;
+                    } else {
+                        resetFieldError(input);
+                    }
+                    return;
+                }
+
                 // Пропускаем скрытые поля
                 const inputWrapper = input.closest('.input_wrapper');
                 if (inputWrapper) {
