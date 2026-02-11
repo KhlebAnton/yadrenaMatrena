@@ -397,7 +397,8 @@
 
                                         <span>Под заказ. Срок изготовления 4-7 дней</span>
                                     </div>
-                                    <button type="button" class="btn btn-primary">Заказать</button>
+                                    <button type="button" class="btn btn-primary"
+                                        data-btn="order_product">Заказать</button>
                                 </div>
                                 <div class="product_page_faq-container">
                                     <div class="faq-item">
@@ -979,7 +980,22 @@
 
 
 
-
+    <div class="modal-overlay" data-modal="order_product">
+        <div class="modal_popup">
+            <svg class="modal-close">
+                <use href="./images/sprite.svg#close"></use>
+            </svg>
+            <div class="order_product_content">
+                <h2>
+                    Капсула добавлена в корзину
+                </h2>
+                <a href="#" class="btn btn-primary">
+                    Перейти к оформлению заказа
+                </a>
+                <button type="button" class="btn btn_line btn_close_modal" >Продолжить покупки</button>
+            </div>
+        </div>
+    </div>
     <div class="modal-overlay " data-modal="giftOrder">
         <div class="modal_popup">
             <svg class="modal-close">

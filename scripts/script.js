@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
        
 
         const modalId = modal.dataset.modal;
-        const closeBtn = modal.querySelector('.modal-close');
+        const closeBtns = modal.querySelectorAll('.modal-close, .btn_close_modal');
         const openBtn = document.querySelectorAll(`[data-btn="${modalId}"]`);
 
         function openModal(name = null, triggerEl = null) {
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         }
-        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
 
         modal.addEventListener('click', function (e) {
             if (e.target === modal) closeModal();
