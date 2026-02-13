@@ -33,6 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
         wrapper.addEventListener('click', () => togglePlay());
     });
 
+    document.querySelectorAll('.check-label_box_cart .tooltip').forEach(function (tooltip) {
+        tooltip.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+
     const header = document.querySelector('.header');
 
     if (header) {
@@ -961,19 +968,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    // FAQ accordion — delegated handler (works for dynamic content)
+    // FAQ accordion — delegated handler (works for dynamic content), повторный клик закрывает вкладку
     (function () {
         document.addEventListener('click', function (e) {
             const item = e.target.closest('.faq-item');
             if (!item) return; // click was not on a faq item
 
-            // Close all other open items (query live list each time)
+            const wasOpen = item.classList.contains('is-open');
+
+            // Close all other open items
             document.querySelectorAll('.faq-item.is-open').forEach(other => {
                 if (other !== item) other.classList.remove('is-open');
             });
 
-            // Toggle current
-            item.classList.add('is-open');
+            // Toggle current: если уже открыт — закрыть, иначе открыть
+            if (wasOpen) {
+                item.classList.remove('is-open');
+            } else {
+                item.classList.add('is-open');
+            }
         });
     })();
 
@@ -1028,10 +1041,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })();
 
-    // Копирование ссылки при клике на «Поделиться» на странице товара (актив 2 сек)
+    // Копирование ссылки при клике на «Поделиться» на странице товара (актив 5 сек, на мобиле — тултип «Ссылка скопирована»)
     (function () {
         const shareBtn = document.querySelector('.product_page__share');
         if (!shareBtn) return;
+
+        function showCopyTooltip() {
+            var tooltip = shareBtn.querySelector('.product_page__share_tooltip');
+            if (!tooltip) return;
+            tooltip.classList.add('is-visible');
+            clearTimeout(shareBtn._tooltipTimer);
+            shareBtn._tooltipTimer = setTimeout(function () {
+                tooltip.classList.remove('is-visible');
+            }, 2500);
+        }
 
         shareBtn.addEventListener('click', async (e) => {
             e.preventDefault();
@@ -1039,6 +1062,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 await navigator.clipboard.writeText(window.location.href);
                 shareBtn.classList.add('is-active');
                 setTimeout(() => shareBtn.classList.remove('is-active'), 5000);
+                showCopyTooltip();
             } catch (err) {
                 console.error('Не удалось скопировать ссылку', err);
             }

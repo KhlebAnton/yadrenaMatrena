@@ -83,7 +83,7 @@
                 <nav class="breadcrumbs">
                     <a href="/">Главная</a>
                     <a href="/">Каталог</a>
-                    <a href="#">Лунная тень</a>
+                    <span>Лунная тень</span>
                 </nav>
                 <div class="product_page_content">
                     <div class="product_page_img_wrapper">
@@ -250,7 +250,9 @@
                                         Цветок света
                                     </h1>
                                     <div class="product_share_btns">
-                                        <div class="product_page__share"></div>
+                                        <div class="product_page__share">
+                                            <span class="product_page__share_tooltip" aria-hidden="true">Ссылка скопирована</span>
+                                        </div>
                                         <div class="product_card__like">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -463,16 +465,24 @@
                                     О товаре
                                 </span>
                                 <div class="product_page_info__rich_content">
-                                    <div class="rich_item">
-                                        <img src="./images/rich/1.png" alt="">
-
+                                    <div class="rich_item ">
+                                        <picture>
+                                            <source srcset="./images/rich/1mob.png" media="(min-width: 1000px) and (max-width:1300px)">
+                                            <source srcset="./images/rich/1.png" media="(min-width: 1000px)">
+                                            <source srcset="./images/rich/1mob.png" media=" (max-width:768px)">
+                                            <img src="./images/rich/1.png" alt="Banner">
+                                        </picture>
                                         <button type="button" class="btn btn-primary" data-btn="rich"
                                             data-img='["./images/rich/1.png", "./images/rich/2.png", "./images/rich/2.png"]'>Подробнее</button>
 
                                     </div>
                                     <div class="rich_item">
-                                        <img src="./images/rich/2.png" alt="">
-
+                                        <picture>
+                                            <source srcset="./images/rich/2mob.png" media="(min-width: 1000px) and (max-width:1300px)">
+                                            <source srcset="./images/rich/2.png" media="(min-width: 1000px)">
+                                            <source srcset="./images/rich/2mob.png" media=" (max-width:768px)">
+                                            <img src="./images/rich/2.png" alt="Banner">
+                                        </picture>
                                         <button type="button" class="btn btn-primary" data-btn="rich"
                                             data-img='["./images/rich/2.png", "./images/rich/1.png", "./images/rich/2.png"]'>Подробнее</button>
                                     </div>
