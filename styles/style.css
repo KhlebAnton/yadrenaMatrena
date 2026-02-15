@@ -4174,6 +4174,7 @@ display: flex;
     }
     .product_card {
     background: #E8E1D1;
+    border-radius: 16px;
     }
     .product_card:hover {
     background: #E8E1D1;
@@ -4367,7 +4368,7 @@ display: flex;
 
     .catalog__content {
         grid-template-columns: 1fr 1fr;
-        gap: 30px 10px;
+        gap: 10px;
     }
 
     .product_card__hint {
