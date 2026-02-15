@@ -4492,6 +4492,13 @@ display: flex;
     .modal-overlay[data-modal="order_product"] .modal_popup {
         max-width: none;
     }
+
+    .faq-item:hover .faq-arrow {
+        transform: none;
+    }
+    .faq-item.is-open .faq-arrow {
+    transform: rotate(-180deg);
+}
 }
 
 

@@ -984,6 +984,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Toggle current: если уже открыт — закрыть, иначе открыть
             if (wasOpen) {
                 item.classList.remove('is-open');
+                
             } else {
                 item.classList.add('is-open');
             }
